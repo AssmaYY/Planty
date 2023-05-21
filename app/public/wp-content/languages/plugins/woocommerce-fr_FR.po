@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - WooCommerce - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2023-05-09 23:08:58+0000\n"
+"PO-Revision-Date: 2023-05-17 11:54:12+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -524,6 +524,10 @@ msgstr "Générer des variantes"
 #: includes/admin/meta-boxes/views/html-product-data-variations.php:29
 msgid "Add some attributes in the <a class=\"variations-add-attributes-link\" href=\"%1$s\">Attributes</a> tab to generate variations. Make sure to check the <b>Used for variations</b> box. <a class=\"variations-learn-more-link\" href=\"%2$s\" target=\"_blank\" rel=\"noreferrer\">Learn more</a>"
 msgstr "Ajoutez quelques attributs dans l’onglet <a class=\"variations-add-attributes-link\" href=\"%1$s\">Attributs</a> pour générer des variantes. Veillez à cocher la case <b>Utilisé pour les variantes</b>. <a class=\"variations-learn-more-link\" href=\"%2$s\" target=\"_blank\" rel=\"noreferrer\">Lire la suite</a>"
+
+#: includes/admin/views/html-admin-page-status-report.php:42
+msgid "Download for support"
+msgstr "Télécharger pour l’assistance"
 
 #: includes/admin/meta-boxes/views/html-product-data-attributes.php:27
 msgid "Add existing"
