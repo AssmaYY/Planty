@@ -1,0 +1,149 @@
+2023-05-26T13:24:35+00:00 CRITICAL syntax error, unexpected token "&&" dans C:\Users\assma\Local Sites\planty\app\public\wp-content\themes\oceanwp-child\functions.php à la ligne 27
+
+2023-05-26T13:24:35+00:00 CRITICAL syntax error, unexpected token "&&" dans C:\Users\assma\Local Sites\planty\app\public\wp-content\themes\oceanwp-child\functions.php à la ligne 27
+
+2023-05-26T13:56:04+00:00 CRITICAL Uncaught Error: [] operator not supported for strings in C:\Users\assma\Local Sites\planty\app\public\wp-content\themes\oceanwp-child\functions.php:34
+Stack trace:
+#0 C:\Users\assma\Local Sites\planty\app\public\wp-includes\class-wp-hook.php(308): add_extra_item_to_nav_menu('<li id="menu-it...', Object(stdClass))
+#1 C:\Users\assma\Local Sites\planty\app\public\wp-includes\plugin.php(205): WP_Hook->apply_filters('<li id="menu-it...', Array)
+#2 C:\Users\assma\Local Sites\planty\app\public\wp-includes\nav-menu-template.php(267): apply_filters('wp_nav_menu_ite...', '<li id="menu-it...', Object(stdClass))
+#3 C:\Users\assma\Local Sites\planty\app\public\wp-content\plugins\header-footer-elementor\inc\widgets-manager\widgets\class-navigation-menu.php(1934): wp_nav_menu(Object(stdClass))
+#4 C:\Users\assma\Local Sites\planty\app\public\wp-content\plugins\elementor\includes\base\controls-stack.php(2268): HFE\WidgetsManager\Widgets\Navigation_Menu->render()
+#5 C:\Users\assma\Local Sites\planty\app\public\wp-content\plugins\elementor\includes\base\widget-base.php(609): Elementor\Controls_Stack->render_by_mode()
+#6 C:\Users\assma\Local Sites\planty\app\public\wp-content\plugins\elementor\includes\base\widget-base.php(750): Elementor\Widget_Base->render_content()
+#7 C:\Users\assma\Local Sites\planty\app\public\wp-content\plugins\elementor\includes\base\element-base.php(449): Elementor\Widget_Base->print_content()
+#8 C:\Users\assma\Local Sites\planty\app\public\wp-content\plugins\elementor\includes\base\element-base.php(1354): Elementor\Element_Base->print_element()
+#9 C:\Users\assma\Local Sites\planty\app\public\wp-content\plugins\elementor\includes\base\element-base.php(449): Elementor\Element_Base->print_content()
+#10 C:\Users\assma\Local Sites\planty\app\public\wp-content\plugins\elementor\includes\base\element-base.php(1354): Elementor\Element_Base->print_element()
+#11 C:\Users\assma\Local Sites\planty\app\public\wp-content\plugins\elementor\includes\base\element-base.php(449): Elementor\Element_Base->print_content()
+#12 C:\Users\assma\Local Sites\planty\app\public\wp-content\plugins\elementor\core\base\document.php(1711): Elementor\Element_Base->print_element()
+#13 C:\Users\assma\Local Sites\planty\app\public\wp-content\plugins\elementor\core\base\document.php(1106): Elementor\Core\Base\Document->print_elements(Array)
+#14 C:\Users\assma\Local Sites\planty\app\public\wp-content\plugins\elementor\includes\frontend.php(1179): Elementor\Core\Base\Document->print_elements_with_wrapper(Array)
+#15 C:\Users\assma\Local Sites\planty\app\public\wp-content\plugins\elementor\includes\frontend.php(1247): Elementor\Frontend->get_builder_content('151', false)
+#16 C:\Users\assma\Local Sites\planty\app\public\wp-content\plugins\header-footer-elementor\inc\class-header-footer-elementor.php(510): Elementor\Frontend->get_builder_content_for_display('151')
+#17 C:\Users\assma\Local Sites\planty\app\public\wp-content\plugins\header-footer-elementor\inc\hfe-functions.php(88): Header_Footer_Elementor::get_header_content()
+#18 C:\Users\assma\Local Sites\planty\app\public\wp-includes\class-wp-hook.php(308): hfe_render_header('')
+#19 C:\Users\assma\Local Sites\planty\app\public\wp-includes\class-wp-hook.php(332): WP_Hook->apply_filters('', Array)
+#20 C:\Users\assma\Local Sites\planty\app\public\wp-includes\plugin.php(517): WP_Hook->do_action(Array)
+#21 C:\Users\assma\Local Sites\planty\app\public\wp-content\themes\oceanwp\header.php(34): do_action('ocean_header')
+#22 C:\Users\assma\Local Sites\planty\app\public\wp-includes\template.php(783): require_once('C:\\Users\\assma\\...')
+#23 C:\Users\assma\Local Sites\planty\app\public\wp-includes\template.php(718): load_template('C:\\Users\\assma\\...', true, Array)
+#24 C:\Users\assma\Local Sites\planty\app\public\wp-includes\general-template.php(48): locate_template(Array, true, true, Array)
+#25 C:\Users\assma\Local Sites\planty\app\public\wp-content\plugins\elementor\modules\page-templates\templates\header-footer.php(9): get_header()
+#26 C:\Users\assma\Local Sites\planty\app\public\wp-includes\template-loader.php(106): include('C:\\Users\\assma\\...')
+#27 C:\Users\assma\Local Sites\planty\app\public\wp-blog-header.php(19): require_once('C:\\Users\\assma\\...')
+#28 C:\Users\assma\Local Sites\planty\app\public\index.php(17): require('C:\\Users\\assma\\...')
+#29 {main}
+  thrown dans C:\Users\assma\Local Sites\planty\app\public\wp-content\themes\oceanwp-child\functions.php à la ligne 34
+
+2023-05-26T13:58:36+00:00 CRITICAL Uncaught ArgumentCountError: Too few arguments to function add_extra_item_to_nav_menu(), 1 passed in C:\Users\assma\Local Sites\planty\app\public\wp-includes\class-wp-hook.php on line 310 and exactly 2 expected in C:\Users\assma\Local Sites\planty\app\public\wp-content\themes\oceanwp-child\functions.php:29
+Stack trace:
+#0 C:\Users\assma\Local Sites\planty\app\public\wp-includes\class-wp-hook.php(310): add_extra_item_to_nav_menu('<li id="menu-it...')
+#1 C:\Users\assma\Local Sites\planty\app\public\wp-includes\plugin.php(205): WP_Hook->apply_filters('<li id="menu-it...', Array)
+#2 C:\Users\assma\Local Sites\planty\app\public\wp-includes\nav-menu-template.php(267): apply_filters('wp_nav_menu_ite...', '<li id="menu-it...', Object(stdClass))
+#3 C:\Users\assma\Local Sites\planty\app\public\wp-content\plugins\header-footer-elementor\inc\widgets-manager\widgets\class-navigation-menu.php(1934): wp_nav_menu(Object(stdClass))
+#4 C:\Users\assma\Local Sites\planty\app\public\wp-content\plugins\elementor\includes\base\controls-stack.php(2268): HFE\WidgetsManager\Widgets\Navigation_Menu->render()
+#5 C:\Users\assma\Local Sites\planty\app\public\wp-content\plugins\elementor\includes\base\widget-base.php(609): Elementor\Controls_Stack->render_by_mode()
+#6 C:\Users\assma\Local Sites\planty\app\public\wp-content\plugins\elementor\includes\base\widget-base.php(750): Elementor\Widget_Base->render_content()
+#7 C:\Users\assma\Local Sites\planty\app\public\wp-content\plugins\elementor\includes\base\element-base.php(449): Elementor\Widget_Base->print_content()
+#8 C:\Users\assma\Local Sites\planty\app\public\wp-content\plugins\elementor\includes\base\element-base.php(1354): Elementor\Element_Base->print_element()
+#9 C:\Users\assma\Local Sites\planty\app\public\wp-content\plugins\elementor\includes\base\element-base.php(449): Elementor\Element_Base->print_content()
+#10 C:\Users\assma\Local Sites\planty\app\public\wp-content\plugins\elementor\includes\base\element-base.php(1354): Elementor\Element_Base->print_element()
+#11 C:\Users\assma\Local Sites\planty\app\public\wp-content\plugins\elementor\includes\base\element-base.php(449): Elementor\Element_Base->print_content()
+#12 C:\Users\assma\Local Sites\planty\app\public\wp-content\plugins\elementor\core\base\document.php(1711): Elementor\Element_Base->print_element()
+#13 C:\Users\assma\Local Sites\planty\app\public\wp-content\plugins\elementor\core\base\document.php(1106): Elementor\Core\Base\Document->print_elements(Array)
+#14 C:\Users\assma\Local Sites\planty\app\public\wp-content\plugins\elementor\includes\frontend.php(1179): Elementor\Core\Base\Document->print_elements_with_wrapper(Array)
+#15 C:\Users\assma\Local Sites\planty\app\public\wp-content\plugins\elementor\includes\frontend.php(1247): Elementor\Frontend->get_builder_content('151', false)
+#16 C:\Users\assma\Local Sites\planty\app\public\wp-content\plugins\header-footer-elementor\inc\class-header-footer-elementor.php(510): Elementor\Frontend->get_builder_content_for_display('151')
+#17 C:\Users\assma\Local Sites\planty\app\public\wp-content\plugins\header-footer-elementor\inc\hfe-functions.php(88): Header_Footer_Elementor::get_header_content()
+#18 C:\Users\assma\Local Sites\planty\app\public\wp-includes\class-wp-hook.php(308): hfe_render_header('')
+#19 C:\Users\assma\Local Sites\planty\app\public\wp-includes\class-wp-hook.php(332): WP_Hook->apply_filters('', Array)
+#20 C:\Users\assma\Local Sites\planty\app\public\wp-includes\plugin.php(517): WP_Hook->do_action(Array)
+#21 C:\Users\assma\Local Sites\planty\app\public\wp-content\themes\oceanwp\header.php(34): do_action('ocean_header')
+#22 C:\Users\assma\Local Sites\planty\app\public\wp-includes\template.php(783): require_once('C:\\Users\\assma\\...')
+#23 C:\Users\assma\Local Sites\planty\app\public\wp-includes\template.php(718): load_template('C:\\Users\\assma\\...', true, Array)
+#24 C:\Users\assma\Local Sites\planty\app\public\wp-includes\general-template.php(48): locate_template(Array, true, true, Array)
+#25 C:\Users\assma\Local Sites\planty\app\public\wp-content\plugins\elementor\modules\page-templates\templates\header-footer.php(9): get_header()
+#26 C:\Users\assma\Local Sites\planty\app\public\wp-includes\template-loader.php(106): include('C:\\Users\\assma\\...')
+#27 C:\Users\assma\Local Sites\planty\app\public\wp-blog-header.php(19): require_once('C:\\Users\\assma\\...')
+#28 C:\Users\assma\Local Sites\planty\app\public\index.php(17): require('C:\\Users\\assma\\...')
+#29 {main}
+  thrown dans C:\Users\assma\Local Sites\planty\app\public\wp-content\themes\oceanwp-child\functions.php à la ligne 29
+
+2023-05-26T14:21:41+00:00 CRITICAL Uncaught Error: Call to undefined function dump() in C:\Users\assma\Local Sites\planty\app\public\wp-content\themes\oceanwp-child\functions.php:31
+Stack trace:
+#0 C:\Users\assma\Local Sites\planty\app\public\wp-includes\class-wp-hook.php(308): add_extra_item_to_nav_menu('<li id="menu-it...', Object(stdClass))
+#1 C:\Users\assma\Local Sites\planty\app\public\wp-includes\plugin.php(205): WP_Hook->apply_filters('<li id="menu-it...', Array)
+#2 C:\Users\assma\Local Sites\planty\app\public\wp-includes\nav-menu-template.php(267): apply_filters('wp_nav_menu_ite...', '<li id="menu-it...', Object(stdClass))
+#3 C:\Users\assma\Local Sites\planty\app\public\wp-content\plugins\header-footer-elementor\inc\widgets-manager\widgets\class-navigation-menu.php(1934): wp_nav_menu(Object(stdClass))
+#4 C:\Users\assma\Local Sites\planty\app\public\wp-content\plugins\elementor\includes\base\controls-stack.php(2268): HFE\WidgetsManager\Widgets\Navigation_Menu->render()
+#5 C:\Users\assma\Local Sites\planty\app\public\wp-content\plugins\elementor\includes\base\widget-base.php(609): Elementor\Controls_Stack->render_by_mode()
+#6 C:\Users\assma\Local Sites\planty\app\public\wp-content\plugins\elementor\includes\base\widget-base.php(750): Elementor\Widget_Base->render_content()
+#7 C:\Users\assma\Local Sites\planty\app\public\wp-content\plugins\elementor\includes\base\element-base.php(449): Elementor\Widget_Base->print_content()
+#8 C:\Users\assma\Local Sites\planty\app\public\wp-content\plugins\elementor\includes\base\element-base.php(1354): Elementor\Element_Base->print_element()
+#9 C:\Users\assma\Local Sites\planty\app\public\wp-content\plugins\elementor\includes\base\element-base.php(449): Elementor\Element_Base->print_content()
+#10 C:\Users\assma\Local Sites\planty\app\public\wp-content\plugins\elementor\includes\base\element-base.php(1354): Elementor\Element_Base->print_element()
+#11 C:\Users\assma\Local Sites\planty\app\public\wp-content\plugins\elementor\includes\base\element-base.php(449): Elementor\Element_Base->print_content()
+#12 C:\Users\assma\Local Sites\planty\app\public\wp-content\plugins\elementor\core\base\document.php(1711): Elementor\Element_Base->print_element()
+#13 C:\Users\assma\Local Sites\planty\app\public\wp-content\plugins\elementor\core\base\document.php(1106): Elementor\Core\Base\Document->print_elements(Array)
+#14 C:\Users\assma\Local Sites\planty\app\public\wp-content\plugins\elementor\includes\frontend.php(1179): Elementor\Core\Base\Document->print_elements_with_wrapper(Array)
+#15 C:\Users\assma\Local Sites\planty\app\public\wp-content\plugins\elementor\includes\frontend.php(1247): Elementor\Frontend->get_builder_content('151', false)
+#16 C:\Users\assma\Local Sites\planty\app\public\wp-content\plugins\header-footer-elementor\inc\class-header-footer-elementor.php(510): Elementor\Frontend->get_builder_content_for_display('151')
+#17 C:\Users\assma\Local Sites\planty\app\public\wp-content\plugins\header-footer-elementor\inc\hfe-functions.php(88): Header_Footer_Elementor::get_header_content()
+#18 C:\Users\assma\Local Sites\planty\app\public\wp-includes\class-wp-hook.php(308): hfe_render_header('')
+#19 C:\Users\assma\Local Sites\planty\app\public\wp-includes\class-wp-hook.php(332): WP_Hook->apply_filters('', Array)
+#20 C:\Users\assma\Local Sites\planty\app\public\wp-includes\plugin.php(517): WP_Hook->do_action(Array)
+#21 C:\Users\assma\Local Sites\planty\app\public\wp-content\themes\oceanwp\header.php(34): do_action('ocean_header')
+#22 C:\Users\assma\Local Sites\planty\app\public\wp-includes\template.php(783): require_once('C:\\Users\\assma\\...')
+#23 C:\Users\assma\Local Sites\planty\app\public\wp-includes\template.php(718): load_template('C:\\Users\\assma\\...', true, Array)
+#24 C:\Users\assma\Local Sites\planty\app\public\wp-includes\general-template.php(48): locate_template(Array, true, true, Array)
+#25 C:\Users\assma\Local Sites\planty\app\public\wp-content\plugins\elementor\modules\page-templates\templates\header-footer.php(9): get_header()
+#26 C:\Users\assma\Local Sites\planty\app\public\wp-includes\template-loader.php(106): include('C:\\Users\\assma\\...')
+#27 C:\Users\assma\Local Sites\planty\app\public\wp-blog-header.php(19): require_once('C:\\Users\\assma\\...')
+#28 C:\Users\assma\Local Sites\planty\app\public\index.php(17): require('C:\\Users\\assma\\...')
+#29 {main}
+  thrown dans C:\Users\assma\Local Sites\planty\app\public\wp-content\themes\oceanwp-child\functions.php à la ligne 31
+
+2023-05-26T19:52:10+00:00 CRITICAL Uncaught ArgumentCountError: 3 arguments are required, 1 given in C:\Users\assma\Local Sites\planty\app\public\wp-content\themes\oceanwp-child\functions.php:35
+Stack trace:
+#0 C:\Users\assma\Local Sites\planty\app\public\wp-content\themes\oceanwp-child\functions.php(35): sprintf('%20class%20=')
+#1 C:\Users\assma\Local Sites\planty\app\public\wp-includes\class-wp-hook.php(308): add_extra_item_to_nav_menu('<li id="menu-it...', Object(stdClass))
+#2 C:\Users\assma\Local Sites\planty\app\public\wp-includes\plugin.php(205): WP_Hook->apply_filters('<li id="menu-it...', Array)
+#3 C:\Users\assma\Local Sites\planty\app\public\wp-includes\nav-menu-template.php(267): apply_filters('wp_nav_menu_ite...', '<li id="menu-it...', Object(stdClass))
+#4 C:\Users\assma\Local Sites\planty\app\public\wp-content\plugins\header-footer-elementor\inc\widgets-manager\widgets\class-navigation-menu.php(1934): wp_nav_menu(Object(stdClass))
+#5 C:\Users\assma\Local Sites\planty\app\public\wp-content\plugins\elementor\includes\base\controls-stack.php(2268): HFE\WidgetsManager\Widgets\Navigation_Menu->render()
+#6 C:\Users\assma\Local Sites\planty\app\public\wp-content\plugins\elementor\includes\base\widget-base.php(609): Elementor\Controls_Stack->render_by_mode()
+#7 C:\Users\assma\Local Sites\planty\app\public\wp-content\plugins\elementor\includes\base\widget-base.php(750): Elementor\Widget_Base->render_content()
+#8 C:\Users\assma\Local Sites\planty\app\public\wp-content\plugins\elementor\includes\base\element-base.php(449): Elementor\Widget_Base->print_content()
+#9 C:\Users\assma\Local Sites\planty\app\public\wp-content\plugins\elementor\includes\base\element-base.php(1354): Elementor\Element_Base->print_element()
+#10 C:\Users\assma\Local Sites\planty\app\public\wp-content\plugins\elementor\includes\base\element-base.php(449): Elementor\Element_Base->print_content()
+#11 C:\Users\assma\Local Sites\planty\app\public\wp-content\plugins\elementor\includes\base\element-base.php(1354): Elementor\Element_Base->print_element()
+#12 C:\Users\assma\Local Sites\planty\app\public\wp-content\plugins\elementor\includes\base\element-base.php(449): Elementor\Element_Base->print_content()
+#13 C:\Users\assma\Local Sites\planty\app\public\wp-content\plugins\elementor\core\base\document.php(1711): Elementor\Element_Base->print_element()
+#14 C:\Users\assma\Local Sites\planty\app\public\wp-content\plugins\elementor\core\base\document.php(1106): Elementor\Core\Base\Document->print_elements(Array)
+#15 C:\Users\assma\Local Sites\planty\app\public\wp-content\plugins\elementor\includes\frontend.php(1179): Elementor\Core\Base\Document->print_elements_with_wrapper(Array)
+#16 C:\Users\assma\Local Sites\planty\app\public\wp-content\plugins\elementor\includes\frontend.php(1247): Elementor\Frontend->get_builder_content('151', false)
+#17 C:\Users\assma\Local Sites\planty\app\public\wp-content\plugins\header-footer-elementor\inc\class-header-footer-elementor.php(510): Elementor\Frontend->get_builder_content_for_display('151')
+#18 C:\Users\assma\Local Sites\planty\app\public\wp-content\plugins\header-footer-elementor\inc\hfe-functions.php(88): Header_Footer_Elementor::get_header_content()
+#19 C:\Users\assma\Local Sites\planty\app\public\wp-includes\class-wp-hook.php(308): hfe_render_header('')
+#20 C:\Users\assma\Local Sites\planty\app\public\wp-includes\class-wp-hook.php(332): WP_Hook->apply_filters('', Array)
+#21 C:\Users\assma\Local Sites\planty\app\public\wp-includes\plugin.php(517): WP_Hook->do_action(Array)
+#22 C:\Users\assma\Local Sites\planty\app\public\wp-content\themes\oceanwp\header.php(34): do_action('ocean_header')
+#23 C:\Users\assma\Local Sites\planty\app\public\wp-includes\template.php(783): require_once('C:\\Users\\assma\\...')
+#24 C:\Users\assma\Local Sites\planty\app\public\wp-includes\template.php(718): load_template('C:\\Users\\assma\\...', true, Array)
+#25 C:\Users\assma\Local Sites\planty\app\public\wp-includes\general-template.php(48): locate_template(Array, true, true, Array)
+#26 C:\Users\assma\Local Sites\planty\app\public\wp-content\themes\oceanwp\404.php(51): get_header()
+#27 C:\Users\assma\Local Sites\planty\app\public\wp-includes\template-loader.php(106): include('C:\\Users\\assma\\...')
+#28 C:\Users\assma\Local Sites\planty\app\public\wp-blog-header.php(19): require_once('C:\\Users\\assma\\...')
+#29 C:\Users\assma\Local Sites\planty\app\public\index.php(17): require('C:\\Users\\assma\\...')
+#30 {main}
+  thrown dans C:\Users\assma\Local Sites\planty\app\public\wp-content\themes\oceanwp-child\functions.php à la ligne 35
+
+2023-05-26T20:00:35+00:00 CRITICAL syntax error, unexpected token "<" dans C:\Users\assma\Local Sites\planty\app\public\wp-content\themes\oceanwp-child\functions.php à la ligne 42
+
+2023-05-26T20:00:35+00:00 CRITICAL syntax error, unexpected token "<" dans C:\Users\assma\Local Sites\planty\app\public\wp-content\themes\oceanwp-child\functions.php à la ligne 42
+
+2023-05-26T20:01:50+00:00 CRITICAL syntax error, unexpected token "<" dans C:\Users\assma\Local Sites\planty\app\public\wp-content\themes\oceanwp-child\functions.php à la ligne 42
+
+2023-05-26T20:01:50+00:00 CRITICAL syntax error, unexpected token "<" dans C:\Users\assma\Local Sites\planty\app\public\wp-content\themes\oceanwp-child\functions.php à la ligne 42
+

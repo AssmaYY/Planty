@@ -22,3 +22,19 @@ endif;
 add_action( 'wp_enqueue_scripts', 'child_theme_configurator_css', 10 );
 
 // END ENQUEUE PARENT ACTION
+// AJOUT DE LIEN ADMIN
+
+
+add_filter( 'wp_nav_menu_items', 'add_extra_item_to_nav_menu', 10, 2);
+function add_extra_item_to_nav_menu( $items, $args ) {
+    // echo "<pre>";
+    // var_dump($args);
+    // var_dump(strip_tags(htmlspecialchars($items), '<li>'));
+    // die;
+    if (is_user_logged_in() && $args->menu === "menu-principal") {
+        // $items .= '<a href="'. admin_url(sprintf(basename($_SERVER['REQUEST_URI']))) .'">My Account ADMIN</a>';
+        $items .= '<li class="menu-item"><a href="'.admin_url(basename($_SERVER['REQUEST_URI'])).'" class="hfe-menu-item">Admin</a></li>';
+    }
+
+    return $items;
+}
