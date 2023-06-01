@@ -1,10 +1,10 @@
 === Master Addons for Elementor ===
-Contributors: jwthemeltd, litonice13, masteraddons, stalukder03
+Contributors: jwthemeltd, litonice13, masteraddons
 Tags: elementor, elementor addon, elementor widget, clickable column, essential widget, custom css elements, after before image comparison, image hover effects, header & footer builder, template import, elementor addons, elementor extensions,  elementor modules, elementor templates, comment form builder, mega menu, header footer builder, elements, page builder addons,addons, jewletheme, masteraddons
 Requires at least: 4.0
-Tested up to: 6.2
+Tested up to: 6.2.2
 Requires PHP: 5.3
-Stable tag: 2.0.1
+Stable tag: 2.0.2
 License: GPLv2
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -601,6 +601,26 @@ Paste on your Local Computer
 
 
 == Changelog ==
+= 2.0.2 (27-05-2023) =
+* Fixed: Countdown Timer "Minutes" typo issue fixed
+* Fixed: Master Addons icon on Editor alignment issue fixed
+* Fixed: Navigation Menu broken style issue fixed. Thanks [@guitar4jc](https://wordpress.org/support/topic/nav-menu-styling-broken/) for informing about the issue
+* Fixed: Sourcemap file "master-addons-styles.css.map" not found 404 error issue fixed. Thanks [@sneoo4](https://wordpress.org/support/topic/critical-error-on-all-admin-subsites-multisite/) for informing about the issue
+* Updated: All icons picker codebase updated for - Toogle Content, Advanced Tabs, Team Members, Dynamic Table,
+* Added: Icon width on Style tab for "MA Advanced Tabs"
+* Added: Icon Header width, Icon Body width, Icon Header Color, Icon Body with and SVC Icon color on Style tabs for "Dynamic Table"
+* Added: Icon Color, width, border radius, background color updated for Logo Slider
+* Updated: Icon Color, Icon Width updated for Infobox
+* Added: Icon Width added for "Image Hover Effects", updated CSS selectors for SVG icons for "Font Awesome 5"
+* Updated: Flipbox - Icon picker frontend code updated
+* Fixed: Flipbox - Back SVG Icon not resizing issue fixed
+* Added: Creative Links - Added Icon width option
+* Added: Creative Buttons - Added Icon width option and updated SVG icon color option
+* Added: Business Hours - Added Icon width option
+* Added: Business Hours - Added Icon Color option
+* Updated: Advanced Accordion - Icon library codes updated
+* Fixed: WP get_page_by_title() is deprecated
+
 = 2.0.1 (22-03-2023) =
 * Fixed: Call to undefined method Freemius_Api_WordPress::RemoteRequest() PHP fatal error issue fixed
 

@@ -2005,7 +2005,7 @@ class JLTMA_Blog extends Widget_Base
 			[
 				'label'      => __(
 					'Navigation',
-					'master-addons' 
+					'master-addons'
 				),
 				'tab'        => Controls_Manager::TAB_STYLE,
 				'conditions' => [

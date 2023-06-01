@@ -1,6 +1,7 @@
 <?php
 
 namespace MasterAddons\Modules\MegaMenu;
+use MasterAddons\Inc\Helper\Master_Addons_Helper;
 
 class JLTMA_Megamenu_Cpt_Api
 {
@@ -23,14 +24,14 @@ class JLTMA_Megamenu_Cpt_Api
 
         $builder_post_title = 'mastermega-content-' . $content_type . '-' . $content_key;
 
-        $builder_post_id = get_page_by_title($builder_post_title, OBJECT, 'mastermega_content');
+        $builder_post_id    = Master_Addons_Helper::get_page_by_title( $builder_post_title, 'mastermega_content' );
 
         if (is_null($builder_post_id)) {
             $defaults = array(
-                'post_content' => '',
-                'post_title' => $builder_post_title,
-                'post_status' => 'publish',
-                'post_type' => 'mastermega_content',
+                'post_content'  => '',
+                'post_title'    => $builder_post_title,
+                'post_status'   => 'publish',
+                'post_type'     => 'mastermega_content',
             );
             $builder_post_id = wp_insert_post($defaults);
 

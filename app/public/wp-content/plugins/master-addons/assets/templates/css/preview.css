@@ -2,15 +2,16 @@
     color: #fff;
     margin-right: 8px;
     margin-left: 4px;
-    display: inherit;
+    display: contents;
     padding: 0;
     line-height: 40px;
     cursor: pointer;
     vertical-align: middle;
 }
-.elementor-add-new-section .jltma-editor-icon{
-	background: url('../../images/ma-editor-icon.svg') left center no-repeat;
-	background-size: contain;
+
+.elementor-add-new-section .jltma-editor-icon {
+    background: url('../../images/ma-editor-icon.svg') left center no-repeat;
+    background-size: contain;
     color: #fff;
     box-shadow: none;
     height: 40px;
@@ -20,6 +21,7 @@
     position: inherit;
     cursor: pointer;
 }
-.ma-el-add-section-btn{
-    order:3;
+
+.ma-el-add-section-btn {
+    order: 3;
 }

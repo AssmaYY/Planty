@@ -81,10 +81,10 @@ if (!class_exists('Master_Addons_Promotions')) {
                 /** Changelog Items
                  * Starts from: %3$s
                  */
-                __('<span class="dashicons dashicons-yes"></span> <span class="jltma-changes-list">Unsupported operand issue fixed on MA Blog widget</span><br>', 'master-addons'), //%3$s
-                __('<span class="dashicons dashicons-yes"></span> <span class="jltma-changes-list">Comment form field loading issue at backend</span><br>', 'master-addons'),
-                __('<span class="dashicons dashicons-yes"></span> <span class="jltma-changes-list">Google re-captcha issue fixed</span><br>', 'master-addons'),
-                __('<span class="dashicons dashicons-yes"></span> <span class="jltma-changes-list">Swiper Slider overflow issue fixed.</span><br>', 'master-addons') //%6$s
+                __('<span class="dashicons dashicons-yes"></span> <span class="jltma-changes-list">Countdown Timer "Minutes" typo issue fixed</span><br>', 'master-addons'), //%3$s
+                __('<span class="dashicons dashicons-yes"></span> <span class="jltma-changes-list">Master Addons icon on Editor alignment issue fixed</span><br>', 'master-addons'),
+                __('<span class="dashicons dashicons-yes"></span> <span class="jltma-changes-list">Navigation Menu broken style issue fixed</span><br>', 'master-addons'),
+                __('<span class="dashicons dashicons-yes"></span> <span class="jltma-changes-list">Sourcemap file "master-addons-styles.css.map" not found 404 error issue fixed</span><br>', 'master-addons') //%6$s
 
             );
 

@@ -3,7 +3,7 @@
 namespace MasterAddons\Addons;
 
 use \Elementor\Widget_Base;
-use \Elementor\Controls_Stack;
+use Elementor\Icons_Manager;
 use \Elementor\Repeater;
 use \Elementor\Controls_Manager;
 use \Elementor\Group_Control_Border;
@@ -848,7 +848,7 @@ Customization Options.</span>'
 		$this->start_controls_tab('ma_el_team_members_social_icon_tab', [
 			'label' => esc_html__(
 				'Normal',
-				'master-addons' 
+				'master-addons'
 			)
 		]);
 
@@ -921,7 +921,7 @@ Customization Options.</span>'
 		$this->start_controls_tab('ma_el_team_members_social_icon_hover', [
 			'label' => esc_html__(
 				'Hover',
-				'master-addons' 
+				'master-addons'
 			)
 		]);
 
@@ -1081,6 +1081,8 @@ Customization Options.</span>'
 			$ma_el_team_member_image_url = $ma_el_team_member_image_url;
 		}
 
+        $migrated = isset($settings['__fa4_migrated']['social']);
+        $is_new   = empty($settings['icon']) && Icons_Manager::is_migration_allowed();
 
 		if ($settings['ma_el_team_members_preset'] == '-style6') { ?>
 
@@ -1112,7 +1114,12 @@ Customization Options.</span>'
 									<?php foreach ($settings['ma_el_team_member_social_profile_links'] as $item) : ?>
 										<?php $target = $item['link']['is_external'] ? ' target="_blank"' : ''; ?>
 										<a href="<?php echo esc_url($item['link']['url']); ?>" <?php echo esc_attr($target); ?>>
-											<?php Master_Addons_Helper::jltma_fa_icon_picker('fab fa-wordpress', 'icon', $item['social'], 'social'); ?>
+											<?php
+                                            if ($is_new || $migrated){
+                                                Icons_Manager::render_icon($item['social'], ['aria-hidden' => 'true']);
+                                            } else { ?>
+                                                <i class="<?php echo esc_attr($item['icon']); ?>" aria-hidden="true"></i>
+                                            <?php } ?>
 										</a>
 									<?php endforeach; ?>
 								<?php endif; ?>
@@ -1166,20 +1173,25 @@ Customization Options.</span>'
 							<?php echo $this->parse_text_editor($settings['ma_el_team_member_description']); ?>
 						</p>
 
-						<?php if ($settings['ma_el_team_member_enable_social_profiles'] == 'yes') : ?>
+						<?php if ($settings['ma_el_team_member_enable_social_profiles'] == 'yes') { ?>
 							<ul class="list-inline jltma-team-member-social">
-								<?php foreach ($settings['ma_el_team_member_social_profile_links'] as $item) : ?>
+								<?php foreach ($settings['ma_el_team_member_social_profile_links'] as $item) { ?>
 
 									<?php $target = $item['link']['is_external'] ? ' target="_blank"' : ''; ?>
 									<li>
 										<a href="<?php echo esc_url($item['link']['url']); ?>" <?php echo esc_attr($target); ?>>
-											<?php Master_Addons_Helper::jltma_fa_icon_picker('fab fa-wordpress', 'icon', $item['social'], '', 'social'); ?>
+											<?php
+                                            if ($is_new || $migrated){
+                                                Icons_Manager::render_icon($item['social'], ['aria-hidden' => 'true']);
+                                            } else { ?>
+                                                <i class="<?php echo esc_attr($item['icon']); ?>" aria-hidden="true"></i>
+                                            <?php } ?>
 										</a>
 									</li>
 
-								<?php endforeach; ?>
+								<?php } ?>
 							</ul>
-						<?php endif; ?>
+						<?php } ?>
 					</div>
 				</div>
 			</div>

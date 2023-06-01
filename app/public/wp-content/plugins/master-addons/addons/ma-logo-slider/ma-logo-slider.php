@@ -8,6 +8,7 @@ use \Elementor\Widget_Base;
 use \Elementor\Repeater;
 use \Elementor\Utils;
 use \Elementor\Controls_Manager;
+// use Elementor\Icons_Manager;
 use \Elementor\Group_Control_Border;
 use \Elementor\Group_Control_Box_Shadow;
 use \Elementor\Group_Control_Image_Size;
@@ -293,7 +294,7 @@ class JLTMA_Logo_Slider extends Widget_Base
 				'label' => __('Carousel Settings', 'master-addons' ),
 			]
 		);
-		
+
 		$slides_per_column = range(1, 6);
 		$slides_per_column = array_combine($slides_per_column, $slides_per_column);
 
@@ -406,7 +407,7 @@ class JLTMA_Logo_Slider extends Widget_Base
                 'name'       => 'jltma_logo_slider_hover_title_typography',
                 'selector'   => '{{WRAPPER}} .jltma-logo-slider-item .jltma-logo-slider-figure figcaption .jltma-logo-slider-brand-name',
             ]
-        );		
+        );
 		$this->add_responsive_control(
             'jltma_logo_slider_hover_icon_name_spacing',
             [
@@ -443,7 +444,7 @@ class JLTMA_Logo_Slider extends Widget_Base
                 'name'       => 'jltma_logo_slider_hover_subtitle_typography',
                 'selector'   => '{{WRAPPER}} .jltma-logo-slider-item .jltma-logo-slider-figure figcaption .jltma-logo-slider-brand-description',
             ]
-        );	
+        );
 		$this->add_responsive_control(
             'jltma_logo_slider_hover_icon_text_spacing',
             [
@@ -481,6 +482,7 @@ class JLTMA_Logo_Slider extends Widget_Base
                 'type'      => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .jltma-logo-slider-item .jltma-logo-slider-figure i.item-hover-icon' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .jltma-logo-slider-item .jltma-logo-slider-figure svg.item-hover-icon path' => 'fill: {{VALUE}};',
                 ],
             ]
         );
@@ -491,6 +493,7 @@ class JLTMA_Logo_Slider extends Widget_Base
                 'type'      => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .jltma-logo-slider-item .jltma-logo-slider-figure i.item-hover-icon' => 'background-color: {{VALUE}};',
+                    '{{WRAPPER}} .jltma-logo-slider-item .jltma-logo-slider-figure svg.item-hover-icon' => 'background-color: {{VALUE}};',
                 ],
             ]
         );
@@ -501,7 +504,7 @@ class JLTMA_Logo_Slider extends Widget_Base
                 'label'       => esc_html__('Border Color', 'master-addons' ),
                 'placeholder' => '1px',
                 'default'     => '1px',
-                'selector'    => '{{WRAPPER}} .jltma-logo-slider-item .jltma-logo-slider-figure i.item-hover-icon',
+                'selector'    => '{{WRAPPER}} .jltma-logo-slider-item .jltma-logo-slider-figure i.item-hover-icon, {{WRAPPER}} .jltma-logo-slider-item .jltma-logo-slider-figure svg.item-hover-icon',
                 'separator'   => 'before',
             ]
         );
@@ -513,7 +516,7 @@ class JLTMA_Logo_Slider extends Widget_Base
                 'type'       => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', '%'],
                 'selectors'  => [
-                    '{{WRAPPER}} .jltma-logo-slider-item .jltma-logo-slider-figure i.item-hover-icon' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}}; overflow: hidden;',
+                    '{{WRAPPER}} .jltma-logo-slider-item .jltma-logo-slider-figure i.item-hover-icon, {{WRAPPER}} .jltma-logo-slider-item .jltma-logo-slider-figure svg.item-hover-icon' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}}; overflow: hidden;',
                 ],
             ]
         );
@@ -555,6 +558,7 @@ class JLTMA_Logo_Slider extends Widget_Base
                 ],
 				'selectors' => [
 					'{{WRAPPER}} .jltma-logo-slider-item .jltma-logo-slider-figure i.item-hover-icon' => 'font-size: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .jltma-logo-slider-item .jltma-logo-slider-figure svg.item-hover-icon' => 'width: {{SIZE}}{{UNIT}};',
 				],
             ]
         );
@@ -566,7 +570,7 @@ class JLTMA_Logo_Slider extends Widget_Base
 			[
 				'label'      => __(
 					'Navigation',
-					'master-addons' 
+					'master-addons'
 				),
 				'tab'        => Controls_Manager::TAB_STYLE,
 				'conditions' => [
@@ -718,7 +722,7 @@ class JLTMA_Logo_Slider extends Widget_Base
 				<div <?php echo $this->get_render_attribute_string('logo_swiper_wrapper'); ?>>
 					<?php
 	}
- 
+
 	/*
 	* Render Logo Loop
 	*/
@@ -726,7 +730,7 @@ class JLTMA_Logo_Slider extends Widget_Base
 	public function jltma_render_logo_slider_loop_item()
 	{
 		$settings = $this->get_settings_for_display();
-		
+
 		$slider_items = $settings['jltma_logo_slider_items'];
 
 		if (empty($slider_items)) {
@@ -747,7 +751,7 @@ class JLTMA_Logo_Slider extends Widget_Base
 				if (empty($images)) {
 					$images = $demo_images;
 				}
-				
+
 				$image_size = $settings['normal_img_thumb_size'];
 				if( $image_size == 'custom' ){
 					$image_size = array_values($settings['normal_img_thumb_custom_dimension']);
@@ -801,7 +805,7 @@ class JLTMA_Logo_Slider extends Widget_Base
 					]
 				]);
 
-				?> 
+				?>
 				<<?php echo esc_attr($tag); ?> <?php $this->print_render_attribute_string($repeater_key); ?>>
 					<figure class="jltma-logo-slider-figure" >
 
@@ -821,7 +825,7 @@ class JLTMA_Logo_Slider extends Widget_Base
 								echo "<img src=" . $images['url'] . ">";
 							}
 						}
-						
+
 						$item_default_hover = ($settings['item_select_event'] == 'icon_click') ? 'jltma-hover-click' : '';
 						$this->add_render_attribute([
 							'item_click' => [
@@ -832,8 +836,17 @@ class JLTMA_Logo_Slider extends Widget_Base
 						]);
 						$icon_class = 'item-hover-icon '. ($settings['item_select_icon_pos'] ? $settings['item_select_icon_pos'] : 'top_right');
 						if( $settings['item_select_event'] == 'icon_click' )
-							Master_Addons_Helper::jltma_fa_icon_picker('simple-line-icons icon-plus', 'icon', $settings['item_hover_icon'], '', $icon_class); 
-						
+
+                            $migrated = isset($settings['__fa4_migrated']['item_hover_icon']);
+                            $is_new   = empty($settings['icon']) && \Elementor\Icons_Manager::is_migration_allowed();
+
+                            if ($is_new || $migrated){
+                                \Elementor\Icons_Manager::render_icon($settings['item_hover_icon'], ['aria-hidden' => 'true', 'class' => $icon_class]);
+                            } else { ?>
+                                <i class="<?php echo esc_attr($settings['icon']) . ' ' . $icon_class; ?>" aria-hidden="true"></i>
+                            <?php }
+
+
 						// Hover Logo Image
 						if( isset( $item['jltma_logo_slider_hover_type'] ) && ($item['jltma_logo_slider_hover_type'] == 'image') && $item['jltma_logo_slider_image_hover']['url'] ){
 							$slide_hover_image_id = $item['jltma_logo_slider_image_hover']['id'];

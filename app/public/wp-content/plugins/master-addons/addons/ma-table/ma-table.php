@@ -7,6 +7,7 @@ use \Elementor\Widget_Base;
 use \Elementor\Utils;
 use \Elementor\Controls_Manager;
 use \Elementor\Repeater;
+use Elementor\Icons_Manager;
 use \Elementor\Group_Control_Border;
 use \Elementor\Group_Control_Typography;
 use \Elementor\Core\Schemes\Typography;
@@ -734,6 +735,43 @@ class JLTMA_Dynamic_Table extends Widget_Base
             ]
         );
 
+
+		$this->add_control(
+			'ma_el_table_header_icon_size',
+			[
+				'label'   		=> esc_html__('Icon Size (px)', 'master-addons' ),
+				'type'          => Controls_Manager::SLIDER,
+				'size_units' => ['px'],
+				'range' => [
+					'px' => [
+						'min' => 0,
+						'max' => 100,
+					],
+				],
+				'default' => [
+					'unit' => 'px',
+					'size' => 18,
+				],
+				'selectors'  => array(
+                    '{{WRAPPER}} .jltma-table .jltma-table-header span i' => 'font-size:{{SIZE}}{{UNIT}} !important;',
+                    '{{WRAPPER}} .jltma-table .jltma-table-header span svg' => 'width:{{SIZE}}{{UNIT}} !important;',
+				),
+				'style_transfer' => true
+			]
+		);
+
+        $this->add_control(
+            'ma_el_table_header_icon_color',
+            [
+                'label'     => __('Icon Color', 'master-addons'),
+                'type'      => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .jltma-table .jltma-table-header span i' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .jltma-table .jltma-table-header span svg path' => 'fill: {{VALUE}};',
+                ]
+            ]
+        );
+
         $this->add_control(
             'ma_el_table_header_text_color',
             [
@@ -813,6 +851,30 @@ class JLTMA_Dynamic_Table extends Widget_Base
         );
 
 
+		$this->add_control(
+			'ma_el_table_body_icon_size',
+			[
+				'label'   		=> esc_html__('Icon Size (px)', 'master-addons' ),
+				'type'          => Controls_Manager::SLIDER,
+				'size_units' => ['px'],
+				'range' => [
+					'px' => [
+						'min' => 0,
+						'max' => 100,
+					],
+				],
+				'default' => [
+					'unit' => 'px',
+					'size' => 18,
+				],
+				'selectors'  => array(
+                    '{{WRAPPER}} .jltma-table .jltma-table-body span i' => 'font-size:{{SIZE}}{{UNIT}} !important;',
+                    '{{WRAPPER}} .jltma-table .jltma-table-body span svg' => 'width:{{SIZE}}{{UNIT}} !important;',
+				),
+				'style_transfer' => true
+			]
+		);
+
         $this->add_control(
             'ma_el_table_body_icon_color',
             [
@@ -820,6 +882,7 @@ class JLTMA_Dynamic_Table extends Widget_Base
                 'type'      => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .jltma-table .jltma-table-body span i' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .jltma-table .jltma-table-body span svg path' => 'fill: {{VALUE}};',
                 ]
             ]
         );
@@ -902,7 +965,14 @@ class JLTMA_Dynamic_Table extends Widget_Base
 
                             <?php if ('icon' === $thead['icon_type'] && (!empty($thead['header_icon']) || !empty($thead['header_icon']['value']))) { ?>
                                 <span <?php echo $this->get_render_attribute_string($repeater_setting_key); ?>>
-                                    <?php Master_Addons_Helper::jltma_fa_icon_picker('fab fa-elementor', 'icon', $thead['header_icon'], 'header_icon'); ?>
+                                    <?php
+                                    $migrated = isset($thead['__fa4_migrated']['header_icon']);
+                                    $is_new   = empty($thead['icon']) && Icons_Manager::is_migration_allowed();
+                                    if ($is_new || $migrated){
+                                        Icons_Manager::render_icon($thead['header_icon'], ['aria-hidden' => 'true']);
+                                    } else { ?>
+                                        <i class="<?php echo esc_attr($thead['icon']); ?>" aria-hidden="true"></i>
+                                    <?php } ?>
                                 </span>
 
                             <?php } elseif ('image' === $thead['icon_type']) {
@@ -952,7 +1022,14 @@ class JLTMA_Dynamic_Table extends Widget_Base
 
                             <?php if ('icon' === $tbody['icon_type'] && (!empty($tbody['body_icon']) || !empty($tbody['body_icon']['value']))) { ?>
                                 <span <?php echo $this->get_render_attribute_string($table_body_key); ?>>
-                                    <?php Master_Addons_Helper::jltma_fa_icon_picker('fab fa-elementor', 'icon', $tbody['body_icon'], 'body_icon'); ?>
+                                    <?php
+                                    $migrated = isset($tbody['__fa4_migrated']['body_icon']);
+                                    $is_new   = empty($tbody['icon']) && Icons_Manager::is_migration_allowed();
+                                    if ($is_new || $migrated){
+                                        Icons_Manager::render_icon($tbody['body_icon'], ['aria-hidden' => 'true']);
+                                    } else { ?>
+                                        <i class="<?php echo esc_attr($tbody['icon']); ?>" aria-hidden="true"></i>
+                                    <?php } ?>
                                 </span>
                             <?php } elseif ('image' === $tbody['icon_type']) {
 

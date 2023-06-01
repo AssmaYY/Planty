@@ -496,14 +496,10 @@ class JLTMA_Dual_Heading extends Widget_Base
 			]
 		);
 
-		$this->start_controls_tabs('ma_el_dual_heading_icon_style_tabs');
-
-		$this->start_controls_tab('normal', ['label' => esc_html__('Normal', 'master-addons' )]);
-
 		$this->add_control(
 			'ma_el_dual_heading_icon_size',
 			[
-				'label'   => __('Size', 'master-addons' ),
+				'label'   => __('Icon Size (px)', 'master-addons' ),
 				'type'    => Controls_Manager::SLIDER,
 				'default' => [
 					'size' => 40,
@@ -516,9 +512,14 @@ class JLTMA_Dual_Heading extends Widget_Base
 				],
 				'selectors' => [
 					'{{WRAPPER}} .jltma-dual-heading-icon i' => 'font-size: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .jltma-dual-heading-icon svg' => 'width: {{SIZE}}{{UNIT}};',
 				],
 			]
 		);
+
+		$this->start_controls_tabs('ma_el_dual_heading_icon_style_tabs');
+
+		$this->start_controls_tab('normal', ['label' => esc_html__('Normal', 'master-addons' )]);
 
 		$this->add_control(
 			'ma_el_dual_heading_icon_style_color',
@@ -527,7 +528,8 @@ class JLTMA_Dual_Heading extends Widget_Base
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '#8c8c8c',
 				'selectors' => [
-					'{{WRAPPER}} .jltma-dual-heading-icon i' => 'color: {{VALUE}};'
+					'{{WRAPPER}} .jltma-dual-heading-icon i' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .jltma-dual-heading-icon svg path' => 'color: {{VALUE}};'
 				],
 			]
 		);
@@ -683,7 +685,15 @@ class JLTMA_Dual_Heading extends Widget_Base
 				<div class="jltma-dual-heading-wrapper">
 					<?php if ($settings['ma_el_dual_heading_icon_show'] == 'yes') : ?>
 						<span class="jltma-dual-heading-icon">
-							<?php Master_Addons_Helper::jltma_fa_icon_picker('fab fa-elementor', 'icon', $settings['ma_el_dual_heading_icon'], 'ma_el_dual_heading_icon'); ?>
+							<?php
+                            $migrated = isset($settings['__fa4_migrated']['ma_el_dual_heading_icon']);
+                            $is_new   = empty($settings['icon']) && \Elementor\Icons_Manager::is_migration_allowed();
+
+                            if ($is_new || $migrated){
+                                \Elementor\Icons_Manager::render_icon($settings['ma_el_dual_heading_icon'], ['aria-hidden' => 'true']);
+                            } else { ?>
+                                <i class="<?php echo esc_attr($settings['icon']); ?>" aria-hidden="true"></i>
+                            <?php } ?>
 						</span>
 					<?php endif; ?>
 					<<?php echo esc_attr($settings['title_html_tag']); ?> class="jltma-dual-heading-title">

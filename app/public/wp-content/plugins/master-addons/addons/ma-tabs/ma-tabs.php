@@ -9,7 +9,7 @@ use \Elementor\Repeater;
 use \Elementor\Group_Control_Border;
 use \Elementor\Group_Control_Typography;
 use \Elementor\Group_Control_Box_Shadow;
-
+use Elementor\Icons_Manager;
 use MasterAddons\Inc\Helper\Master_Addons_Helper;
 
 if (!defined('ABSPATH')) exit; // If this file is called directly, abort.
@@ -575,7 +575,7 @@ class JLTMA_Tabs extends Widget_Base
 		$this->start_controls_tab('ma_el_tabs_header_normal', [
 			'label' => esc_html__(
 				'Normal',
-				'master-addons' 
+				'master-addons'
 			)
 		]);
 
@@ -654,7 +654,7 @@ class JLTMA_Tabs extends Widget_Base
 		$this->add_control(
 			'ma_el_tabs_icon_size',
 			[
-				'label'   		=> esc_html__('Icon Font Size (px)', 'master-addons' ),
+				'label'   		=> esc_html__('Icon Size (px)', 'master-addons' ),
 				'type'          => Controls_Manager::SLIDER,
 				'size_units' => ['px'],
 				'range' => [
@@ -669,6 +669,7 @@ class JLTMA_Tabs extends Widget_Base
 				],
 				'selectors'  => array(
 					'.jltma--advance-tab .jltma--advance-tab-nav li i' => 'font-size:{{SIZE}}{{UNIT}} !important;',
+					'.jltma--advance-tab .jltma--advance-tab-nav li svg' => 'width:{{SIZE}}{{UNIT}} !important;',
 				),
 				'style_transfer' => true
 			]
@@ -703,7 +704,7 @@ class JLTMA_Tabs extends Widget_Base
 		$this->start_controls_tab('ma_el_tabs_header_active', [
 			'label' => esc_html__(
 				'Active',
-				'master-addons' 
+				'master-addons'
 			)
 		]);
 		$this->add_control(
@@ -1063,21 +1064,28 @@ class JLTMA_Tabs extends Widget_Base
 				<?php } ?>
 
 				<ul class="jltma--advance-tab-nav">
-					<?php foreach ($settings['ma_el_tabs'] as $key => $tab) : ?>
+					<?php foreach ($settings['ma_el_tabs'] as $key => $tab) { ?>
 						<li class="<?php echo esc_attr($tab['ma_el_tab_show_as_default']); ?>" data-tab data-tab-id="jltma-tab-<?php echo $this->get_id() . $key; ?>">
-							<?php if ($settings['ma_el_tabs_icon_show'] === 'yes') :
-								if ($tab['ma_el_tabs_icon_type'] === 'icon') : ?>
-									<?php Master_Addons_Helper::jltma_fa_icon_picker('fas fa-home', 'icon', $tab['ma_el_tab_title_icon'], 'ma_el_tab_title_icon'); ?>
-								<?php elseif ($tab['ma_el_tabs_icon_type'] === 'image') : ?>
+							<?php if ($settings['ma_el_tabs_icon_show'] === 'yes') {
+								if ($tab['ma_el_tabs_icon_type'] === 'icon') {
+                                    $migrated = isset($tab['__fa4_migrated']['ma_el_tab_title_icon']);
+                                    $is_new   = empty($tab['icon']) && Icons_Manager::is_migration_allowed();
+                                    if ($is_new || $migrated){
+                                        Icons_Manager::render_icon($tab['ma_el_tab_title_icon'], ['aria-hidden' => 'true']);
+                                    } else { ?>
+                                        <i class="<?php echo esc_attr($tab['icon']); ?>" aria-hidden="true"></i>
+                                    <?php } ?>
+								<?php } elseif ($tab['ma_el_tabs_icon_type'] === 'image') { ?>
 									<img src="<?php echo esc_attr($tab['ma_el_tab_title_image']['url']);
 												?>">
-								<?php endif; ?>
-							<?php endif; ?>
+							<?php
+                                    }
+                            } ?>
 							<span class="jltma--tab-title">
 								<?php echo $this->parse_text_editor($tab['ma_el_tab_title']); ?>
 							</span>
 						</li>
-					<?php endforeach; ?>
+					<?php } ?>
 				</ul>
 
 				<?php if ($settings['ma_el_tabs_preset'] == "five") { ?>

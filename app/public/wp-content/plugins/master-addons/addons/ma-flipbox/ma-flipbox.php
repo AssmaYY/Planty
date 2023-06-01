@@ -712,7 +712,7 @@ class JLTMA_Flipbox extends Widget_Base
 		$this->add_control(
 			'front_icon_size',
 			[
-				'label' => __('Icon Size', 'master-addons' ),
+				'label' => __('Icon Size (px)', 'master-addons' ),
 				'type'  => Controls_Manager::SLIDER,
 				'range' => [
 					'px' => [
@@ -892,7 +892,7 @@ class JLTMA_Flipbox extends Widget_Base
 		$this->add_control(
 			'back_icon_size',
 			[
-				'label' => __('Icon Size', 'master-addons' ),
+				'label' => __('Icon Size (px)', 'master-addons' ),
 				'type'  => Controls_Manager::SLIDER,
 				'range' => [
 					'px' => [
@@ -902,7 +902,7 @@ class JLTMA_Flipbox extends Widget_Base
 				],
 				'selectors' => [
 					'{{WRAPPER}} .jltma-flip-box-back .icon-wrapper i' => 'font-size: {{SIZE}}{{UNIT}};',
-					'{{WRAPPER}} .jltma-flip-box-front .icon-wrapper svg' => 'height: {{SIZE}}{{UNIT}}; width: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .jltma-flip-box-back .icon-wrapper svg' => 'height: {{SIZE}}{{UNIT}}; width: {{SIZE}}{{UNIT}};',
 				],
 			]
 		);
@@ -1293,7 +1293,15 @@ Customization Options.</span>'
 
 							<?php if ((!empty($settings['icon']) || !empty($settings['front_icon']['value']))) { ?>
 								<div <?php echo $this->get_render_attribute_string('front-icon-wrapper'); ?>>
-									<?php Master_Addons_Helper::jltma_fa_icon_picker('fab fa-elementor', 'icon', $settings['front_icon'], '', 'front-icon'); ?>
+									<?php
+                                    $migrated = isset($settings['__fa4_migrated']['front_icon']);
+                                    $is_new   = empty($settings['icon']) && \Elementor\Icons_Manager::is_migration_allowed();
+
+                                    if ($is_new || $migrated){
+                                        \Elementor\Icons_Manager::render_icon($settings['front_icon'], ['aria-hidden' => 'true', 'class' => 'front-icon']);
+                                    } else { ?>
+                                        <i class="front-icon <?php echo esc_attr($settings['icon']); ?>" aria-hidden="true"></i>
+                                    <?php } ?>
 								</div>
 							<?php } ?>
 
@@ -1323,12 +1331,19 @@ Customization Options.</span>'
 
 							<?php if (!empty($settings['front_icon'])) { ?>
 								<div <?php echo $this->get_render_attribute_string('front-icon-wrapper'); ?>>
-									<?php Master_Addons_Helper::jltma_fa_icon_picker('fab fa-elementor', 'icon', $settings['front_icon'], '', 'front-icon'); ?>
+									<?php
+                                    $migrated = isset($settings['__fa4_migrated']['front_icon']);
+                                    $is_new   = empty($settings['icon']) && \Elementor\Icons_Manager::is_migration_allowed();
+
+                                    if ($is_new || $migrated){
+                                        \Elementor\Icons_Manager::render_icon($settings['front_icon'], ['aria-hidden' => 'true', 'class' => 'front-icon']);
+                                    } else { ?>
+                                        <i class="front-icon <?php echo esc_attr($settings['icon']); ?>" aria-hidden="true"></i>
+                                    <?php } ?>
 								</div>
 							<?php } ?>
 
 						<?php } ?>
-
 
 					</div>
 				</div>
@@ -1337,7 +1352,15 @@ Customization Options.</span>'
 					<div class="jltma-flipbox-content">
 						<?php if (!empty($settings['back_icon'])) { ?>
 							<div <?php echo $this->get_render_attribute_string('back-icon-wrapper'); ?>>
-								<?php Master_Addons_Helper::jltma_fa_icon_picker('fab fa-elementor', 'icon', $settings['back_icon'], '', 'back-icon'); ?>
+									<?php
+                                    $migrated = isset($settings['__fa4_migrated']['back_icon']);
+                                    $is_new   = empty($settings['icon']) && \Elementor\Icons_Manager::is_migration_allowed();
+
+                                    if ($is_new || $migrated){
+                                        \Elementor\Icons_Manager::render_icon($settings['back_icon'], ['aria-hidden' => 'true', 'class' => 'back-icon']);
+                                    } else { ?>
+                                        <i class="back-icon <?php echo esc_attr($settings['icon']); ?>" aria-hidden="true"></i>
+                                    <?php } ?>
 							</div>
 						<?php } ?>
 

@@ -3,6 +3,7 @@
 namespace MasterAddons\Modules\MegaMenu;
 
 use MasterAddons\Modules\MegaMenu\JLTMA_Megamenu_Options;
+use MasterAddons\Inc\Helper\Master_Addons_Helper;
 // use \Walker_Nav_Menu;
 
 class JLTMA_Megamenu_Nav_Walker extends \Walker_Nav_Menu
@@ -168,7 +169,7 @@ class JLTMA_Megamenu_Nav_Walker extends \Walker_Nav_Menu
          */
         $id = apply_filters('nav_menu_item_id', 'menu-item-' . $item->ID, $item, $args, $depth);
         $id = $id ? ' id="' . esc_attr($id) . '"' : '';
-        
+
         $output .= $indent . '<li' . $id . $class_names . $data_menu_width_type . '>';
         $atts = array();
         $atts['title']  = !empty($item->attr_title) ? $item->attr_title : '';
@@ -293,7 +294,7 @@ class JLTMA_Megamenu_Nav_Walker extends \Walker_Nav_Menu
                     }
 
                     $builder_post_title = 'mastermega-content-megamenu-menuitem' . $item->ID;
-                    $builder_post = get_page_by_title($builder_post_title, OBJECT, 'mastermega_content');
+                    $builder_post    = Master_Addons_Helper::get_page_by_title( $builder_post_title, 'mastermega_content' );
                     $output .= '<ul class="dropdown-menu jltma-megamenu fade-up" style="width:'.$width.'">';
                     if ($builder_post != null) {
                         $elementor = \Elementor\Plugin::instance();

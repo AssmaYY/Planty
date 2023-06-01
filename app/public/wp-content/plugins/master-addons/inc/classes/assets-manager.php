@@ -11,8 +11,7 @@ class Master_Addons_Assets
     {
         add_action( 'elementor/init', [ $this, 'jltma_on_elementor_init' ], 0 );
         // Enqueue Styles and Scripts
-        // add_action('wp_enqueue_scripts', [$this, 'jltma_enqueue_scripts'], 100);
-        // add_action('wp_enqueue_scripts', [$this, 'jltma_enqueue_scripts']); // Changed on 10-9-21
+        add_action( 'wp_enqueue_scripts', [ $this, 'jltma_enqueue_scripts' ], 100 );
     }
     
     public function jltma_on_elementor_init()

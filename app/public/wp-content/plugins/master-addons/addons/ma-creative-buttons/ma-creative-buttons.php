@@ -449,7 +449,42 @@ class JLTMA_Creative_Button extends Widget_Base
 			]
 		);
 
+		$this->add_control(
+			'ma_el_creative_button_icon_color',
+			[
+				'label'     => esc_html__('Icon Color', 'master-addons' ),
+				'type'      => Controls_Manager::COLOR,
+				'default'   => '#ffffff',
+				'selectors' => [
+					'{{WRAPPER}} .jltma-creative-button i'     => 'color: {{VALUE}};',
+					'{{WRAPPER}} .jltma-creative-button svg' => 'fill: {{VALUE}};',
+				],
+                'condition' => [
+                    'ma_el_creative_button_icon[value]!' => '',
+                ],
+			]
+		);
 
+		$this->add_control(
+			'ma_el_creative_button_icon_size',
+			[
+				'label'   => __('Icon Size (px)', 'master-addons' ),
+				'type'    => Controls_Manager::SLIDER,
+				'range' => [
+					'px' => [
+						'min' => 10,
+						'max' => 100,
+					],
+				],
+				'selectors' => [
+					'{{WRAPPER}} .jltma-creative-button i'      => 'font-size: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .jltma-creative-button svg'    => 'width: {{SIZE}}{{UNIT}};',
+				],
+                'condition' => [
+                    'ma_el_creative_button_icon[value]!' => '',
+                ],
+			]
+		);
 
 		$this->add_control(
 			'ma_el_creative_button_background_color',
@@ -729,18 +764,31 @@ Customization Options.</span>'
 		<div class="jltma-creative-button-wrapper">
 			<a <?php echo $this->get_render_attribute_string('ma_el_creative_button'); ?>>
 				<span>
-					<?php if (!empty($settings['ma_el_creative_button_icon']) && $settings['ma_el_creative_button_icon_alignment'] == 'left') : ?>
+					<?php if (!empty($settings['ma_el_creative_button_icon']) && $settings['ma_el_creative_button_icon_alignment'] == 'left') {
 
-						<?php Master_Addons_Helper::jltma_fa_icon_picker('fas fa-external-link-alt', 'icon', $settings['ma_el_creative_button_icon'], 'ma_el_creative_button_icon', 'jltma-creative-button-icon-left'); ?>
-					<?php endif; ?>
+                        $migrated = isset($settings['__fa4_migrated']['ma_el_creative_button_icon']);
+                        $is_new   = empty($settings['icon']) && \Elementor\Icons_Manager::is_migration_allowed();
 
-					<?php echo $this->parse_text_editor($settings['creative_button_text']); ?>
+                        if ($is_new || $migrated){
+                            \Elementor\Icons_Manager::render_icon($settings['ma_el_creative_button_icon'], ['aria-hidden' => 'true', 'class'=> 'jltma-creative-button-icon-left']);
+                        } else { ?>
+                            <i class="jltma-creative-button-icon-left <?php echo esc_attr($settings['icon']); ?>" aria-hidden="true"></i>
+                        <?php }
+                        }
 
-					<?php if (!empty($settings['ma_el_creative_button_icon']) && $settings['ma_el_creative_button_icon_alignment'] == 'right') : ?>
+                        echo $this->parse_text_editor($settings['creative_button_text']);
 
-						<?php Master_Addons_Helper::jltma_fa_icon_picker('fas fa-external-link-alt', 'icon', $settings['ma_el_creative_button_icon'], 'ma_el_creative_button_icon', 'jltma-creative-button-icon-right'); ?>
+                        if (!empty($settings['ma_el_creative_button_icon']) && $settings['ma_el_creative_button_icon_alignment'] == 'right') {
 
-					<?php endif; ?>
+                            $migrated = isset($settings['__fa4_migrated']['ma_el_creative_button_icon']);
+                            $is_new   = empty($settings['icon']) && \Elementor\Icons_Manager::is_migration_allowed();
+
+                            if ($is_new || $migrated){
+                                \Elementor\Icons_Manager::render_icon($settings['ma_el_creative_button_icon'], ['aria-hidden' => 'true', 'class'=> 'jltma-creative-button-icon-right']);
+                            } else { ?>
+                                <i class="jltma-creative-button-icon-right <?php echo esc_attr($settings['icon']); ?>" aria-hidden="true"></i>
+                            <?php }
+                        } ?>
 				</span>
 			</a>
 		</div>

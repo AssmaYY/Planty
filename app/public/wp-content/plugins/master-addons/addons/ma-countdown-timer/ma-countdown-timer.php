@@ -151,7 +151,7 @@ class JLTMA_Countdown_Timer extends Widget_Base
 		$this->add_control(
 			'ma_el_show_min',
 			array(
-				'label'        => __('Display Mintues', 'master-addons' ),
+				'label'        => __('Display Minutes', 'master-addons' ),
 				'type'         => Controls_Manager::SWITCHER,
 				'label_on'     => __('On', 'master-addons' ),
 				'label_off'    => __('Off', 'master-addons' ),
@@ -785,7 +785,7 @@ class JLTMA_Countdown_Timer extends Widget_Base
 			'min' => array(
 				'value'   => !empty($time[1]) ? $time[1] : '',
 				'display' => !empty($show_min) ? $show_min : '',
-				'title'   => 'Mintues'
+				'title'   => 'Minutes'
 			),
 			'sec' => array(
 				'value'   => !empty($time[1]) ? $time[1] : '',

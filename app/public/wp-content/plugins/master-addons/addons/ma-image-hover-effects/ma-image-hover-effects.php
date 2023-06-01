@@ -1211,14 +1211,12 @@ class JLTMA_Image_Hover_Effects extends Widget_Base
 				]
 			);
 		}
-
 		$this->end_controls_section();
 
 
-
 		/*
-			 * Social Icons Style
-			 */
+        * Social Icons Style
+        */
 
 		$this->start_controls_section(
 			'ma_el_main_image_icon_hover_style_section',
@@ -1230,6 +1228,41 @@ class JLTMA_Image_Hover_Effects extends Widget_Base
 				]
 			]
 		);
+
+
+		$this->add_control(
+			'ma_el_main_image_icon_size',
+			[
+				'label'   		=> esc_html__('Icon Size (em)', 'master-addons' ),
+				'type'          => Controls_Manager::SLIDER,
+				'size_units'    => [ 'px', 'em', 'rem'],
+				'range' => [
+					'px' => [
+						'min' => 10,
+						'max' => 100,
+						'step' => 1,
+					],
+					'em' => [
+						'min' => 1,
+						'max' => 10,
+					],
+					'rem' => [
+						'min' => 1,
+						'max' => 10,
+					],
+				],
+				'default' => [
+					'unit' => 'rem',
+					'size' => 1.2,
+				],
+				'selectors'  => array(
+                    '{{WRAPPER}} .jltma-image-hover-effect .jltma-icon-links a i' => 'font-size:{{SIZE}}{{UNIT}} !important;',
+                    '{{WRAPPER}} .jltma-image-hover-effect .jltma-icon-links a svg' => 'width:{{SIZE}}{{UNIT}} !important;',
+				),
+				'style_transfer' => true
+			]
+		);
+
 
 		$this->start_controls_tabs('ma_el_main_image_icon_style_tabs');
 
@@ -1251,7 +1284,8 @@ class JLTMA_Image_Hover_Effects extends Widget_Base
 				],
 				//					'default'   => '#fff',
 				'selectors' => [
-					'{{WRAPPER}} .jltma-image-hover-effect .jltma-icon-links a' => 'color: {{VALUE}};'
+					'{{WRAPPER}} .jltma-image-hover-effect .jltma-icon-links a' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .jltma-image-hover-effect .jltma-icon-links a svg' => 'fill: {{VALUE}};'
 				],
 			]
 		);
@@ -1468,7 +1502,17 @@ class JLTMA_Image_Hover_Effects extends Widget_Base
 							<p class="jltma-icon-links">
 								<?php foreach ($settings['ma_el_main_image_icon_tabs'] as $index => $tab) { ?>
 									<a href="<?php echo esc_url_raw($tab['ma_el_main_image_icon_link']['url']); ?>">
-										<span><?php Master_Addons_Helper::jltma_fa_icon_picker('fab fa-elementor', 'icon', $tab['ma_el_main_image_icon'], 'ma_el_main_image_icon'); ?></span>
+										<span>
+                                            <?php
+                                            $migrated = isset($tab['__fa4_migrated']['ma_el_main_image_icon']);
+                                            $is_new   = empty($tab['icon']) && \Elementor\Icons_Manager::is_migration_allowed();
+
+                                            if ($is_new || $migrated){
+                                                \Elementor\Icons_Manager::render_icon($tab['ma_el_main_image_icon'], ['aria-hidden' => 'true']);
+                                            } else { ?>
+                                                <i class="<?php echo esc_attr($tab['icon']); ?>" aria-hidden="true"></i>
+                                            <?php } ?>
+                                        </span>
 									</a>
 								<?php } ?>
 							</p>

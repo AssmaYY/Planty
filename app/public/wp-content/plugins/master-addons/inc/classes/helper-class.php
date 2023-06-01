@@ -866,8 +866,15 @@ class Master_Addons_Helper
 		$words = explode(' ', $the_excerpt, $excerpt_length + 1);
 
 		if ($excerpt_icon) {
-			// $excerpt_icon = $excerpt_icon;
-			$excerpt_icon = self::jltma_fa_icon_picker('fas fa-chevron-right', 'icon', $excerpt_icon, 'blog_excerpt_icon');
+
+            $migrated = isset($settings['__fa4_migrated'][$excerpt_icon]);
+            $is_new   = empty($settings['icon']) && \Elementor\Icons_Manager::is_migration_allowed();
+
+            if ($is_new || $migrated){
+                $excerpt_icon = \Elementor\Icons_Manager::render_icon($settings[$excerpt_icon], ['aria-hidden' => 'true', 'class' => 'blog_excerpt_icon']);
+            } else {
+                $excerpt_icon = '<i class="' . esc_attr($settings['icon']) . '" aria-hidden="true"></i>';
+            }
 		}
 
 		if (count($words) > $excerpt_length) :
@@ -1122,6 +1129,23 @@ class Master_Addons_Helper
 	}
 
 
+	public static function get_page_by_title( $page_title, $post_type = 'page' ) {
+		$query = new \WP_Query(
+			array(
+				'post_type' => $post_type,
+				'title' => $page_title,
+			)
+		);
+
+		if (!empty($query->post)) {
+			$page_got_by_title = $query->post;
+		} else {
+			$page_got_by_title = null;
+		}
+
+		return $page_got_by_title;
+	}
+
 	public static function jltma_post_types_category_slug()
 	{
 
@@ -1314,39 +1338,6 @@ class Master_Addons_Helper
 		}
 
 		return $url;
-	}
-
-
-	// Font Awesome Icon Picker Library
-	public static function jltma_fa_icon_picker($font_name = 'fab fa-elementor', $fa4_name = "", $control_name = "", $attr_name = "", $extra_class = "", $settings = '')
-	{
-
-		if (!isset($settings[$fa4_name]) && !Icons_Manager::is_migration_allowed()) {
-			$settings[$fa4_name] = 'fab fa-elementor';
-		}
-
-		$has_icon  = !empty($settings[$fa4_name]);
-		if ($has_icon and 'icon' == $control_name) {
-			$this->add_render_attribute($attr_name, 'class', [$control_name . $extra_class]);
-			$this->add_render_attribute($attr_name, 'aria-hidden', 'true');
-		}
-
-		if (!$has_icon && !empty($control_name['value'])) {
-			$has_icon = true;
-		}
-
-		$migrated  = isset($settings['__fa4_migrated'][$control_name]);
-		$is_new    = empty($settings[$fa4_name]) && Icons_Manager::is_migration_allowed();
-
-
-		if ($is_new || $migrated) {
-			Icons_Manager::render_icon($control_name, [
-				'class' 		=> $extra_class,
-				'aria-hidden' 	=> 'true'
-			]);
-		} else {
-			echo '<i ' . $this->get_render_attribute_string($attr_name) . '></i>';
-		}
 	}
 
 

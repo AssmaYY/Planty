@@ -443,6 +443,27 @@ class JLTMA_Creative_Links extends Widget_Base
 			]
 		);
 
+		$this->add_control(
+			'ma_el_creative_link_icon_size',
+			[
+				'label'   => __('Icon Size (px)', 'master-addons' ),
+				'type'    => Controls_Manager::SLIDER,
+				'default' => [
+					'size' => 15,
+				],
+				'range' => [
+					'px' => [
+						'min' => 10,
+						'max' => 100,
+					],
+				],
+				'selectors' => [
+					'{{WRAPPER}} .jltma-creative-links .jltma-creative-link i' => 'font-size: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .jltma-creative-links .jltma-creative-link a svg' => 'width: {{SIZE}}{{UNIT}};',
+				],
+			]
+		);
+
 		$this->add_group_control(
 			Group_Control_Typography::get_type(),
 			[
@@ -770,9 +791,9 @@ Customization Options.</span>'
 																									($settings['creative_link_effect'] == "jltma-cl-effect-18") ||
 																									($settings['creative_link_effect'] == "jltma-cl-effect-19") ||
 																									($settings['creative_link_effect'] == "jltma-cl-effect-20")
-																								) { ?> data-hover="<?php echo (($settings['creative_link_effect'] == "jltma-cl-effect-11") || 
-																									($settings['creative_link_effect'] == "jltma-cl-effect-15") || 
-																									($settings['creative_link_effect'] == "jltma-cl-effect-16")) ? $this->parse_text_editor($settings['creative_link_text']) : ( $settings['creative_alternative_link_text'] ? $this->parse_text_editor($settings['creative_alternative_link_text']) : $this->parse_text_editor($settings['creative_link_text']) ); 
+																								) { ?> data-hover="<?php echo (($settings['creative_link_effect'] == "jltma-cl-effect-11") ||
+																									($settings['creative_link_effect'] == "jltma-cl-effect-15") ||
+																									($settings['creative_link_effect'] == "jltma-cl-effect-16")) ? $this->parse_text_editor($settings['creative_link_text']) : ( $settings['creative_alternative_link_text'] ? $this->parse_text_editor($settings['creative_alternative_link_text']) : $this->parse_text_editor($settings['creative_link_text']) );
 																								?>" <?php } ?>>
 
 						<?php if (($settings['creative_link_effect'] == "jltma-cl-effect-2") ||
@@ -781,28 +802,41 @@ Customization Options.</span>'
 							($settings['creative_link_effect'] == "jltma-cl-effect-20")
 						) { ?>
 							<span data-hover="<?php echo ($settings['creative_alternative_link_text']) ? $settings['creative_alternative_link_text'] : $settings['creative_link_text']; ?>">
-							<?php } ?>
+							<?php }
 
 
-							<?php if (($settings['creative_link_effect'] !== "jltma-cl-effect-10") &&
+                            if (($settings['creative_link_effect'] !== "jltma-cl-effect-10") &&
 							($settings['creative_link_effect'] !== "jltma-cl-effect-11") &&
 							($settings['creative_link_effect'] !== "jltma-cl-effect-15") &&
 							($settings['creative_link_effect'] !== "jltma-cl-effect-16") &&
 							($settings['creative_link_effect'] !== "jltma-cl-effect-17")
 							) {
-								if (!empty($settings['ma_el_creative_link_icon']) && $settings['ma_el_creative_link_icon_alignment'] == 'left') { ?>
-									<?php
-									Master_Addons_Helper::jltma_fa_icon_picker('fas fa-external-link-alt', 'icon', $settings['ma_el_creative_link_icon'], 'ma_el_creative_link_icon', 'jltma-creative-link-icon-left'); ?>
-							<?php }
-							} ?>
+								if (!empty($settings['ma_el_creative_link_icon']) && $settings['ma_el_creative_link_icon_alignment'] == 'left') {
+                                    $migrated = isset($settings['__fa4_migrated']['ma_el_creative_link_icon']);
+                                    $is_new   = empty($settings['icon']) && \Elementor\Icons_Manager::is_migration_allowed();
 
+                                    if ($is_new || $migrated){
+                                        \Elementor\Icons_Manager::render_icon($settings['ma_el_creative_link_icon'], ['aria-hidden' => 'true', 'class'=> 'jltma-creative-link-icon-left']);
+                                    } else { ?>
+                                        <i class="jltma-creative-link-icon-left <?php echo esc_attr($settings['icon']); ?>" aria-hidden="true"></i>
+                                    <?php }
+                                }
+							}
 
-							<?php if ($settings['creative_link_effect'] == "jltma-cl-effect-10") { ?>
+                            if ($settings['creative_link_effect'] == "jltma-cl-effect-10") { ?>
 								<span>
 									<?php if ($settings['creative_link_effect'] == "jltma-cl-effect-10") {
-										if (!empty($settings['ma_el_creative_link_icon']) && $settings['ma_el_creative_link_icon_alignment'] == 'left') { ?>
-											<?php Master_Addons_Helper::jltma_fa_icon_picker('fas fa-external-link-alt', 'icon', $settings['ma_el_creative_link_icon'], 'ma_el_creative_link_icon', 'jltma-creative-link-icon-left'); ?>
-									<?php }
+										if (!empty($settings['ma_el_creative_link_icon']) && $settings['ma_el_creative_link_icon_alignment'] == 'left') {
+
+                                            $migrated = isset($settings['__fa4_migrated']['ma_el_creative_link_icon']);
+                                            $is_new   = empty($settings['icon']) && \Elementor\Icons_Manager::is_migration_allowed();
+
+                                            if ($is_new || $migrated){
+                                                \Elementor\Icons_Manager::render_icon($settings['ma_el_creative_link_icon'], ['aria-hidden' => 'true', 'class'=> 'jltma-creative-link-icon-left']);
+                                            } else { ?>
+                                                <i class="jltma-creative-link-icon-left <?php echo esc_attr($settings['icon']); ?>" aria-hidden="true"></i>
+                                            <?php }
+                                        }
 									} ?>
 									<?php echo $this->parse_text_editor($settings['creative_link_text']); ?>
 								</span>
@@ -819,9 +853,16 @@ Customization Options.</span>'
 
 
 
-							<?php if (!empty($settings['ma_el_creative_link_icon']) && $settings['ma_el_creative_link_icon_alignment'] == 'right') : ?>
-								<?php Master_Addons_Helper::jltma_fa_icon_picker('fas fa-external-link-alt', 'icon', $settings['ma_el_creative_link_icon'], 'ma_el_creative_link_icon', 'jltma-creative-link-icon-right'); ?>
-							<?php endif; ?>
+							<?php if (!empty($settings['ma_el_creative_link_icon']) && $settings['ma_el_creative_link_icon_alignment'] == 'right') {
+                                $migrated = isset($settings['__fa4_migrated']['ma_el_creative_link_icon']);
+                                $is_new   = empty($settings['icon']) && \Elementor\Icons_Manager::is_migration_allowed();
+
+                                if ($is_new || $migrated){
+                                    \Elementor\Icons_Manager::render_icon($settings['ma_el_creative_link_icon'], ['aria-hidden' => 'true', 'class'=> 'jltma-creative-link-icon-right']);
+                                } else { ?>
+                                    <i class="jltma-creative-link-icon-right <?php echo esc_attr($settings['icon']); ?>" aria-hidden="true"></i>
+                                <?php }
+                            } ?>
 
 							<?php if (($settings['creative_link_effect'] == "jltma-cl-effect-2")  ||
 								($settings['creative_link_effect'] == "jltma-cl-effect-5") ||

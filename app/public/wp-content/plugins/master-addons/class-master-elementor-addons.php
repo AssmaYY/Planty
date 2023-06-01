@@ -76,6 +76,12 @@ if ( !class_exists( 'Master_Elementor_Addons' ) ) {
             ma_el_fs()->add_filter( 'support_forum_submenu', [ $this, 'jltma_override_support_menu_text' ] );
             ma_el_fs()->add_filter( 'support_forum_url', [ $this, 'jltma_support_forum_url' ] );
             ma_el_fs()->add_filter( 'freemius_pricing_js_path', [ $this, 'jltma_new_freemius_pricing_js' ] );
+            ma_el_fs()->add_filter( 'plugin_icon', [ $this, 'jltma_freemius_logo_icon' ] );
+        }
+        
+        public function jltma_freemius_logo_icon()
+        {
+            return JLTMA_IMAGE_DIR . 'master-addons.png';
         }
         
         public function jltma_is_plugin_row_meta_and_actions_link()

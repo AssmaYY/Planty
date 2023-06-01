@@ -548,6 +548,38 @@ Customization Options.</span>'
 				]
 			]
 		);
+
+		$this->add_control(
+			'ma_el_tooltip_icon_width',
+			[
+				'label' => __('Icon Width', 'master-addons' ),
+				'type'  => Controls_Manager::SLIDER,
+				'range' => [
+					'px' => [
+						'min'  => 0,
+						'max'  => 1000,
+						'step' => 5,
+					],
+					'%' => [
+						'min' => 0,
+						'max' => 100,
+					],
+				],
+				'size_units' => ['px', '%'],
+				'default'    => [
+					'unit' => 'px',
+					'size' => 30,
+				],
+                'condition'   => [
+					'ma_el_tooltip_type' => ['icon']
+				],
+				'selectors' => [
+					'{{WRAPPER}} .jltma-tooltip i' => 'font-size: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .jltma-tooltip svg' => 'width: {{SIZE}}{{UNIT}};',
+				]
+			]
+		);
+
 		$this->add_control(
 			'ma_el_tooltip_content_padding',
 			[
@@ -963,7 +995,13 @@ Customization Options.</span>'
 			<?php if ($settings['ma_el_tooltip_type'] === 'text') { ?>
 				<?php echo $this->parse_text_editor($settings['ma_el_tooltip_content']); ?>
 			<?php } elseif ($settings['ma_el_tooltip_type'] === 'icon') {
-				Master_Addons_Helper::jltma_fa_icon_picker('fab fa-linux', 'icon', $settings['ma_el_tooltip_icon_content'], 'ma_el_tooltip_icon_content');
+                $migrated = isset($settings['__fa4_migrated']['ma_el_tooltip_icon_content']);
+                $is_new   = empty($settings['icon']) && Icons_Manager::is_migration_allowed();
+                if ($is_new || $migrated){
+                    Icons_Manager::render_icon($settings['ma_el_tooltip_icon_content'], ['aria-hidden' => 'true']);
+                } else { ?>
+                    <i class="<?php echo esc_attr($settings['icon']); ?>" aria-hidden="true"></i>
+                <?php }
 			} elseif ($settings['ma_el_tooltip_type'] === 'image') { ?>
 				<img src="<?php echo esc_url($settings['ma_el_tooltip_img_content']['url']); ?>">
 			<?php } ?>

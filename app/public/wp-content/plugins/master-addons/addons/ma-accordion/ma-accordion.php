@@ -124,7 +124,7 @@ class JLTMA_Advanced_Accordion extends Widget_Base
 				'label'         	=> esc_html__('Icon', 'master-addons' ),
 				'description' 		=> esc_html__('Please choose an icon from the list.', 'master-addons' ),
 				'type'          	=> Controls_Manager::ICONS,
-				'fa4compatibility' 	=> 'icon',
+				'fa4compatibility' 	=> 'icon_title',
 				'default'       	=> [
 					'value'     => 'fas fa-plus',
 					'library'   => 'solid',
@@ -154,7 +154,7 @@ class JLTMA_Advanced_Accordion extends Widget_Base
 				'label'         	=> esc_html__('Icon', 'master-addons' ),
 				'description' 		=> esc_html__('Please choose an icon from the list.', 'master-addons' ),
 				'type'          	=> Controls_Manager::ICONS,
-				'fa4compatibility' 	=> 'icon',
+				'fa4compatibility' 	=> 'icon_collapse',
 				'default'       	=> [
 					'value'     => 'fas fa-minus',
 					'library'   => 'solid',
@@ -1506,16 +1506,49 @@ class JLTMA_Advanced_Accordion extends Widget_Base
 									if ($tab['accordion_tab_icon_show'] === 'yes') { ?>
 										<span class="jltma-accordion-toggle-icon jltma-accordion-tab-icon">
 											<?php
-											Master_Addons_Helper::jltma_fa_icon_picker('fas fa-minus', 'icon', $tab['accordion_tab_title_icon_collapse'], 'accordion_tab_title_icon_collapse', 'jltma-el-accordion-icon-closed');
-											Master_Addons_Helper::jltma_fa_icon_picker('fas fa-plus', 'icon', $tab['accordion_tab_title_icon'], 'accordion_tab_title_icon', 'jltma-el-accordion-icon-opened');
-											?>
+                                            $migrated = isset($settings['__fa4_migrated']['accordion_tab_title_icon_collapse']);
+                                            $is_new   = empty($settings['icon_collapse']) && \Elementor\Icons_Manager::is_migration_allowed();
+                                            if ($is_new || $migrated){
+                                                \Elementor\Icons_Manager::render_icon($settings['accordion_tab_title_icon_collapse'], ['aria-hidden' => 'true', 'class'=> 'jltma-el-accordion-icon-closed']);
+                                            } else { ?>
+                                                <i class="jltma-el-accordion-icon-closed <?php echo esc_attr($settings['icon_collapse']); ?>" aria-hidden="true"></i>
+                                            <?php }
+
+
+                                            // $active_migrated = isset($settings['__fa4_migrated']['accordion_tab_title_icon']);
+                                            // $active_is_new   = empty($settings['icon_active']) && \Elementor\Icons_Manager::is_migration_allowed();
+
+                                            $title_migrated = isset($settings['__fa4_migrated']['accordion_tab_title_icon']);
+                                            $title_is_new   = empty($settings['icon_title']) && \Elementor\Icons_Manager::is_migration_allowed();
+
+                                            if ($title_is_new || $title_migrated){
+                                                \Elementor\Icons_Manager::render_icon($settings['accordion_tab_title_icon'], ['aria-hidden' => 'true', 'class'=> 'jltma-el-accordion-icon-opened']);
+                                            } else { ?>
+                                                <i class="jltma-el-accordion-icon-opened <?php echo esc_attr($settings['icon_title']); ?>" aria-hidden="true"></i>
+                                            <?php } ?>
+
 										</span>
 									<?php } else { ?>
 										<span class="jltma-accordion-toggle-icon">
-											<?php Master_Addons_Helper::jltma_fa_icon_picker('fas fa-minus', 'icon', $settings['toggle_icon'], 'toggle_minus_icon', 'jltma-el-accordion-icon-closed');
-											?>
-											<?php Master_Addons_Helper::jltma_fa_icon_picker('fas fa-plus', 'icon', $settings['active_icon'], 'toggle_active_icon', 'jltma-el-accordion-icon-opened');
-											?>
+											<?php
+
+                                            $migrated = isset($settings['__fa4_migrated']['toggle_icon']);
+                                            $is_new   = empty($settings['icon_collapse']) && \Elementor\Icons_Manager::is_migration_allowed();
+                                            if ($is_new || $migrated){
+                                                \Elementor\Icons_Manager::render_icon($settings['toggle_icon'], ['aria-hidden' => 'true', 'class'=> 'jltma-el-accordion-icon-closed']);
+                                            } else { ?>
+                                                <i class="jltma-el-accordion-icon-closed <?php echo esc_attr($settings['icon_collapse']); ?>" aria-hidden="true"></i>
+                                            <?php }
+
+
+                                            $active_migrated = isset($settings['__fa4_migrated']['active_icon']);
+                                            $active_is_new   = empty($settings['icon']) && \Elementor\Icons_Manager::is_migration_allowed();
+                                            if ($active_is_new || $active_migrated){
+                                                \Elementor\Icons_Manager::render_icon($settings['active_icon'], ['aria-hidden' => 'true', 'class'=> 'jltma-el-accordion-icon-opened']);
+                                            } else { ?>
+                                                <i class="jltma-el-accordion-icon-opened <?php echo esc_attr($settings['icon_title']); ?>" aria-hidden="true"></i>
+                                            <?php } ?>
+
 										</span>
 								<?php }
 								} ?>
@@ -1529,16 +1562,42 @@ class JLTMA_Advanced_Accordion extends Widget_Base
 								if ($tab['accordion_tab_icon_show'] === 'yes') { ?>
 									<span class="jltma-accordion-toggle-icon jltma-accordion-tab-icon">
 										<?php
-										Master_Addons_Helper::jltma_fa_icon_picker('fas fa-minus', 'icon', $tab['accordion_tab_title_icon_collapse'], 'accordion_tab_title_icon_collapse', 'jltma-el-accordion-icon-closed');
-										Master_Addons_Helper::jltma_fa_icon_picker('fas fa-plus', 'icon', $tab['accordion_tab_title_icon'], 'accordion_tab_title_icon', 'jltma-el-accordion-icon-opened');
-										?>
+                                        $migrated = isset($tab['__fa4_migrated']['accordion_tab_title_icon_collapse']);
+                                        $is_new   = empty($tab['icon_collapse']) && \Elementor\Icons_Manager::is_migration_allowed();
+                                        if ($is_new || $migrated){
+                                            \Elementor\Icons_Manager::render_icon($tab['accordion_tab_title_icon_collapse'], ['aria-hidden' => 'true', 'class'=> 'jltma-el-accordion-icon-closed']);
+                                        } else { ?>
+                                            <i class="jltma-el-accordion-icon-closed <?php echo esc_attr($tab['icon_collapse']); ?>" aria-hidden="true"></i>
+                                        <?php }
+
+
+                                        $active_migrated = isset($tab['__fa4_migrated']['accordion_tab_title_icon']);
+                                        $active_is_new   = empty($tab['icon_title']) && \Elementor\Icons_Manager::is_migration_allowed();
+                                        if ($active_is_new || $active_migrated){
+                                            \Elementor\Icons_Manager::render_icon($tab['accordion_tab_title_icon'], ['aria-hidden' => 'true', 'class'=> 'jltma-el-accordion-icon-opened']);
+                                        } else { ?>
+                                            <i class="jltma-el-accordion-icon-opened <?php echo esc_attr($tab['icon_title']); ?>" aria-hidden="true"></i>
+                                        <?php } ?>
 									</span>
 								<?php } else { ?>
 									<span class="jltma-accordion-toggle-icon">
-										<?php Master_Addons_Helper::jltma_fa_icon_picker('fas fa-minus', 'icon', $settings['toggle_icon'], 'toggle_minus_icon', 'jltma-el-accordion-icon-closed');
-										?>
-										<?php Master_Addons_Helper::jltma_fa_icon_picker('fas fa-plus', 'icon', $settings['active_icon'], 'toggle_active_icon', 'jltma-el-accordion-icon-opened');
-										?>
+										<?php
+                                        $migrated = isset($settings['__fa4_migrated']['toggle_icon']);
+                                        $is_new   = empty($settings['icon_collapse']) && \Elementor\Icons_Manager::is_migration_allowed();
+                                        if ($is_new || $migrated){
+                                            \Elementor\Icons_Manager::render_icon($settings['toggle_icon'], ['aria-hidden' => 'true', 'class'=> 'jltma-el-accordion-icon-closed']);
+                                        } else { ?>
+                                            <i class="jltma-el-accordion-icon-closed <?php echo esc_attr($settings['icon_collapse']); ?>" aria-hidden="true"></i>
+                                        <?php }
+
+
+                                        $active_migrated = isset($settings['__fa4_migrated']['active_icon']);
+                                        $active_is_new   = empty($settings['icon']) && \Elementor\Icons_Manager::is_migration_allowed();
+                                        if ($active_is_new || $active_migrated){
+                                            \Elementor\Icons_Manager::render_icon($settings['active_icon'], ['aria-hidden' => 'true', 'class'=> 'jltma-el-accordion-icon-opened']);
+                                        } else { ?>
+                                            <i class="jltma-el-accordion-icon-opened <?php echo esc_attr($settings['icon_title']); ?>" aria-hidden="true"></i>
+                                        <?php } ?>
 									</span>
 							<?php }
 							} ?>

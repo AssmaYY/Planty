@@ -744,6 +744,45 @@ class JLTMA_Business_Hours extends Widget_Base
 			]
 		);
 
+		$this->add_control(
+			'ma_el_bh_day_icon_color',
+			[
+				'label'     => esc_html__('Icon Color', 'master-addons' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .jltma-business-hour li i'     => 'color: {{VALUE}};',
+					'{{WRAPPER}} .jltma-business-hour li svg'   => 'fill: {{VALUE}};',
+				],
+                'condition' => [
+                    'ma_el_bh_day_icon[value]!' => '',
+                ],
+			]
+		);
+
+		$this->add_control(
+			'ma_el_bh_day_icon_size',
+			[
+				'label'   => __('Icon Size (px)', 'master-addons' ),
+				'type'    => Controls_Manager::SLIDER,
+				'default' => [
+					'size' => 13,
+				],
+				'range' => [
+					'px' => [
+						'min' => 10,
+						'max' => 100,
+					],
+				],
+				'selectors' => [
+					'{{WRAPPER}} .jltma-business-hour li i'      => 'font-size: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .jltma-business-hour li svg'    => 'width: {{SIZE}}{{UNIT}};',
+				],
+                'condition' => [
+                    'ma_el_bh_day_icon[value]!' => '',
+                ],
+			]
+		);
+
 		$this->start_controls_tabs('tabs_rows_style');
 
 		$this->start_controls_tab(
@@ -1354,7 +1393,15 @@ class JLTMA_Business_Hours extends Widget_Base
 					<li <?php echo $this->get_render_attribute_string('jltma-row' . $i); ?>>
 						<span class="jltma-business-day-name float-left">
 							<?php if ($settings['ma_el_bh_show_day_icon'] == "yes") {
-								Master_Addons_Helper::jltma_fa_icon_picker('far fa-clock', 'icon', $settings['ma_el_bh_day_icon'], 'ma_el_bh_day_icon');
+                                $migrated = isset($settings['__fa4_migrated']['ma_el_bh_day_icon']);
+                                $is_new   = empty($settings['icon']) && \Elementor\Icons_Manager::is_migration_allowed();
+
+                                if ($is_new || $migrated){
+                                    \Elementor\Icons_Manager::render_icon($settings['ma_el_bh_day_icon'], ['aria-hidden' => 'true']);
+                                } else { ?>
+                                    <i class="<?php echo esc_attr($settings['icon']); ?>" aria-hidden="true"></i>
+                                <?php }
+
 							} ?>
 
 							<?php
@@ -1416,7 +1463,16 @@ class JLTMA_Business_Hours extends Widget_Base
 					<li <?php echo $this->get_render_attribute_string('jltma-row' . $i); ?>>
 						<span class="jltma-business-day-name float-left">
 							<?php if ($settings['ma_el_bh_show_day_icon'] == "yes") {
-								Master_Addons_Helper::jltma_fa_icon_picker('far fa-clock', 'icon', $settings['ma_el_bh_day_icon'], 'ma_el_bh_day_icon');
+
+                                $migrated = isset($settings['__fa4_migrated']['ma_el_bh_day_icon']);
+                                $is_new   = empty($settings['icon']) && \Elementor\Icons_Manager::is_migration_allowed();
+
+                                if ($is_new || $migrated){
+                                    \Elementor\Icons_Manager::render_icon($settings['ma_el_bh_day_icon'], ['aria-hidden' => 'true']);
+                                } else { ?>
+                                    <i class="<?php echo esc_attr($settings['icon']); ?>" aria-hidden="true"></i>
+                                <?php }
+
 							} ?>
 
 							<?php
@@ -1517,7 +1573,16 @@ class JLTMA_Business_Hours extends Widget_Base
 									<span class="jltma-business-day-name float-left">
 										<?php
 										if ($settings['ma_el_bh_show_day_icon'] == "yes") {
-											Master_Addons_Helper::jltma_fa_icon_picker('far fa-clock', 'icon', $settings['ma_el_bh_day_icon'], 'ma_el_bh_day_icon');
+
+                                            $migrated = isset($settings['__fa4_migrated']['ma_el_bh_day_icon']);
+                                            $is_new   = empty($settings['icon']) && \Elementor\Icons_Manager::is_migration_allowed();
+
+                                            if ($is_new || $migrated){
+                                                \Elementor\Icons_Manager::render_icon($settings['ma_el_bh_day_icon'], ['aria-hidden' => 'true']);
+                                            } else { ?>
+                                                <i class="<?php echo esc_attr($settings['icon']); ?>" aria-hidden="true"></i>
+                                            <?php }
+
 										} ?>
 										<?php
 										echo esc_attr($item['ma_el_bh_custom_day']);

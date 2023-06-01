@@ -396,7 +396,7 @@ class JLTMA_Infobox extends Widget_Base
 				'label'                 => __('Hover', 'master-addons' ),
 			]
 		);
-		
+
 		$this->add_group_control(
 			Group_Control_Background::get_type(),
 			[
@@ -528,7 +528,7 @@ class JLTMA_Infobox extends Widget_Base
 				'label'                 => __('Background Color', 'master-addons' ),
 				'type'                  => Controls_Manager::COLOR,
 				'selectors'	=> [
-					'{{WRAPPER}} .jltma-infobox .jltma-infobox-icon' => 'background-color:{{VALUE}};',
+					'{{WRAPPER}} .jltma-infobox .jltma-infobox-icon, {{WRAPPER}} .jltma-infobox .jltma-infobox-icon' => 'background-color:{{VALUE}};',
 				],
 			]
 		);
@@ -1094,28 +1094,41 @@ Customization Options.</span>'
 
 					<?php if ( ($settings['ma_el_infobox_preset'] === "two") || ($settings['ma_el_infobox_preset'] === "three") ) { ?>
 						<div class="bg-fade-icon">
-							<?php if ('img' == $settings['ma_el_infobox_img_or_icon']) : ?>
+							<?php if ('img' == $settings['ma_el_infobox_img_or_icon']) { ?>
 								<img src="<?php echo esc_url($infobox_image_url); ?>" alt="<?php echo get_post_meta($infobox_image['id'], '_wp_attachment_image_alt', true); ?>">
-							<?php else: ?>
-								<?php Master_Addons_Helper::jltma_fa_icon_picker('fas fa-tag', 'icon', $settings['ma_el_infobox_icon'], '', 'ma_el_infobox_icon'); ?>
-							<?php endif; ?>
+							<?php } else{
+                                $migrated = isset($settings['__fa4_migrated']['ma_el_infobox_icon']);
+                                $is_new   = empty($settings['icon']) && \Elementor\Icons_Manager::is_migration_allowed();
+
+                                if ($is_new || $migrated){
+                                    \Elementor\Icons_Manager::render_icon($settings['ma_el_infobox_icon'], ['aria-hidden' => 'true']);
+                                } else { ?>
+                                    <i class="<?php echo esc_attr($settings['icon']); ?>" aria-hidden="true"></i>
+                                <?php }
+                            } ?>
 						</div>
 					<?php } ?>
 
 					<div class="jltma-infobox-icon <? echo esc_attr(('img' == $settings['ma_el_infobox_img_or_icon']) ? 'image' : ''); ?>">
-						
+
 						<div class="jltma-inner-content">
 
-							<?php if ('icon' == $settings['ma_el_infobox_img_or_icon']) { ?>
-								<?php Master_Addons_Helper::jltma_fa_icon_picker('fas fa-tag', 'icon', $settings['ma_el_infobox_icon'], '', 'ma_el_infobox_icon'); ?>
-							<?php } ?>
+							<?php if ('icon' == $settings['ma_el_infobox_img_or_icon']) {
+                                $migrated = isset($settings['__fa4_migrated']['ma_el_infobox_icon']);
+                                $is_new   = empty($settings['icon']) && \Elementor\Icons_Manager::is_migration_allowed();
 
-							<?php if ('img' == $settings['ma_el_infobox_img_or_icon']) : ?>
+                                if ($is_new || $migrated){
+                                    \Elementor\Icons_Manager::render_icon($settings['ma_el_infobox_icon'], ['aria-hidden' => 'true']);
+                                } else { ?>
+                                    <i class="<?php echo esc_attr($settings['icon']); ?>" aria-hidden="true"></i>
+                                <?php }
+                            }
+
+                            if ('img' == $settings['ma_el_infobox_img_or_icon']) { ?>
 								<img src="<?php echo esc_url($infobox_image_url); ?>" alt="<?php echo get_post_meta($infobox_image['id'], '_wp_attachment_image_alt', true); ?>">
-							<?php endif; ?>
+							<?php }
 
-
-							<?php if ($settings['ma_el_infobox_preset'] == "nine") { ?>
+                            if ($settings['ma_el_infobox_preset'] == "nine") { ?>
 
 								<?php if ($settings['ma_el_infobox_title_link']['url']) { ?>
 									<a href="<?php echo esc_url_raw($settings['ma_el_infobox_title_link']['url']); ?>" <?php echo $this->get_render_attribute_string('ma_el_infobox_title_link_attr'); ?>>
@@ -1141,7 +1154,7 @@ Customization Options.</span>'
 				<?php endif; ?>
 
 				<div class="jltma-infobox-content">
-					<div class="jltma-inner-content"> 
+					<div class="jltma-inner-content">
 						<?php if ($settings['ma_el_infobox_title_link']['url']) { ?>
 							<a href="<?php echo esc_url_raw($settings['ma_el_infobox_title_link']['url']); ?>" <?php echo $this->get_render_attribute_string('ma_el_infobox_title_link_attr'); ?>>
 								<h3 class="jltma-infobox-content-title">
